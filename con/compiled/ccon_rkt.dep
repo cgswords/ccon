@@ -1,1 +1,0 @@
-("6.2" ("bf431a62ccfa91f367628a906cd9199f5e476bb8" . "0d1a721540b78ccfdf41524e4fd8656d2f5b2c30") (collects #"con" #"ccon" #"blame.rkt") (collects #"racket" #"contract" #"base.rkt") (collects #"racket" #"runtime-config.rkt") (collects #"con" #"ccon" #"core.rkt") (collects #"racket" #"main.rkt") (collects #"con" #"ccon" #"combinators.rkt") (collects #"con" #"ccon" #"manager.rkt"))
