@@ -1,0 +1,2958 @@
+% \documentclass[envcountsect,envcountsame,runninheads]{llncs} 
+ \documentclass[envcountsect,envcountsame,runningheads]{llncs} 
+
+%\usepackage{geometry}
+%\geometry{left=4.36cm,right=4.36cm,top=4.4cm,bottom=4.4cm}
+\usepackage{times} 
+\usepackage{color}
+
+%\usepackage{amsthm}
+
+\usepackage{amsmath} 
+\usepackage{amssymb} 
+\usepackage{amsfonts}
+\usepackage{stmaryrd}
+\usepackage{mathpartir}
+
+\usepackage{proof}
+
+\usepackage{prooftree}
+\usepackage{xspace}
+
+% Use first command for generating long version, the other for proceedings version
+%\newcommand{\longg}[2]{#1}  % with appendix
+\newcommand{\longg}[2]{#2} % without appendix
+
+\newcommand{\LC}[1]
+        {[\textbf{\textcolor{red}{LC: #1}}]}
+\newcommand{\sep}{\;|\;}
+\newcommand{\caseopof}[1]{\textbf{(Case of #1)}}
+
+%% pi-calculus
+\newcommand{\linkr}[2]{[#1\!\leftrightarrow\!#2]}
+\newcommand{\pvar}[1]{\mathcal{#1}}
+\newcommand{\para}{\mathord{\;\boldsymbol{|}\;}}
+\newcommand{\zero}{{\bf 0}}
+\newcommand{\nub}{{\boldsymbol{\nu}}}
+\newcommand{\taub}{{\boldsymbol{\tau}}}
+\newcommand{\mub}{{\boldsymbol{\mu}}}
+\newcommand{\send}[2]{\mathord{#1\!\left<#2\right>}}
+\newcommand{\inp}[3]{#1(#2).#3}
+
+\newcommand{\fix}[2]{(\mbox{\bf rec}\;\pvar{#1}.{#2})}
+
+\newcommand{\fixx}[4]{(\mbox{\bf rec}\;\pvar{#1}_{#2}(#3).{#4})}
+
+%\newcommand{\proof}{\noindent{\it Proof. }}
+
+\newcommand{\kw}[1]{\mbox{\bf #1}}
+
+%% sets
+
+\newcommand{\Names}{\Lambda}
+\newcommand{\Vars}{{\cal V}}
+\newcommand{\Pars}{{\cal X}}
+\newcommand{\Pvars}{\chi}
+\newcommand{\PN}{\mathbb{P}}
+\newcommand{\RN}{\mathbb{R}}
+\newcommand{\brr}[1]{\left<#1\right>}
+
+\newcommand{\FC}[0]{${\cal F}$}
+
+\newcommand{\fn}[1]{\mbox{\it fn}(#1)}
+\newcommand{\nam}[1]{\mbox{\it na}(#1)}
+\newcommand{\bn}[1]{\mbox{\it bn}(#1)}
+\newcommand{\bd}[2]{\mbox{\it bd}_{#1}(#2)}
+\newcommand{\fv}[1]{\mbox{\it fv}(#1)}
+\newcommand{\fs}[1]{\mbox{\it fs}(#1)}
+\newcommand{\fnv}[1]{\mbox{\it fnv}(#1)}
+\newcommand{\fpv}[1]{\mbox{\it fpv}(#1)}
+\newcommand{\fprv}[1]{\mbox{\it fprv}(#1)}
+\newcommand{\fvv}[2]{\mathit{fn}^{#1}(#2)}
+\newcommand{\fvvs}[2]{\mathit{fs}^{#1}(#2)}
+%\newcommand{\subst}[2]{\{^{#1}\!/{\scriptstyle #2}\}}
+\newcommand{\asubst}[2]{[#1\mathord{:=}#2]}
+%\newcommand{\subst}[2]{\{#1/#2\}}
+\def\subst#1#2{\{\raisebox{.5ex}{\small$#1$}\! / \mbox{\small$#2$}\}}
+\newcommand{\deff}{\triangleq}
+
+\newcommand{\sfn}[2]{\mbox{\it ofn}_{#1}(#2)}
+\newcommand{\ofn}[1]{\sfn{}{#1}}
+
+\newcommand{\red}{\rightarrow} 
+
+\newcommand{\tred}{\stackrel{*}{\red}}
+
+\newcommand{\nred}{\stackrel{n}{\red}}
+
+\newcommand{\tr}[3]{#1\stackrel{#2}{\rightarrow} #3}
+
+%% formulas
+
+\newcommand{\paradj}{\triangleright} 
+\newcommand{\recomp}{\triangleleft} 
+\newcommand{\hide}{\ssfn{H}}
+%\newcommand{\fresh}{\ssfn{N}}
+\newcommand{\ffresh}{\ssfn{F}}
+\newcommand{\fresh}{\mbox{\fontencoding{OT2}\fontfamily{wncyss}\selectfont I}}
+\newcommand{\False}{\mbox{\bf F}}
+\newcommand{\True}{\mbox{\bf T}}
+\newcommand{\poss}{\diamond}
+\newcommand{\next}{\mathord{\odot}}
+\newcommand{\rev}[2]{#1\mbox{\footnotesize${\boldsymbol{\circledR}}$}#2}
+\newcommand{\revadj}[2]{#2\mathord{\oslash}#1}
+\newcommand{\hidetext}[1]{}
+\newcommand{\fvc}[1]{\copyright{#1}}
+\newcommand{\apart}[2]{#1\# #2}
+\newcommand{\apr}[2]{#1\# #2}
+\newcommand{\negv}[1]{\mbox{{\rm Neg}}(#1)}
+\newcommand{\posv}[1]{\mbox{{\rm Pos}}(#1)}
+
+\newcommand{\pnext}{{\Diamond{\hspace{-1.05ex}{\cdot}\hspace{0.5ex}}}}
+
+\newcommand{\anext}{\mathord{\boxdot}}
+\newcommand{\ctx}[2]{#1[#2]}
+
+%% derived
+\newcommand{\hidden}{\ssfn{H}}
+\newcommand{\lollis}{\;{-\hspace{-.9ex}\diamond}\;}
+
+
+%% semantics
+\newcommand{\paradenot}{\otimes} 
+\newcommand{\one}{{\bf 1}}
+\newcommand{\denot}[1]{\llbracket #1 \rrbracket}
+\newcommand{\supp}[1]{\mbox{\it supp}(#1)}
+
+%% substitutions
+
+\newcommand{\tapp}[2]{#1\mathord{\boldsymbol{\cdot}}#2}
+%\newcommand{\transp}[2]{\{#1/ / #2\}}
+\newcommand{\transp}[2]{\{#1\mathord{\leftrightarrow}#2\}}
+\newcommand{\dom}[1]{|#1|}
+\newcommand{\cod}[1]{{\mathfrak{C}}(#1)}
+\newcommand{\im}[1]{{\mathfrak{I}}(#1)}
+\newcommand{\ups}[2]{\{#1\mapsto #2\}}
+\newcommand{\from}{\mathord{\leftarrow}}
+
+%% utilities
+
+\newcommand{\ih}{induction hypothesis}
+\newcommand{\comment}[1]{\begin{quote}{\em #1}\end{quote}}
+\newcommand{\name}[1]{\mbox{{{(#1)}}}}
+\newcommand{\aand}{{,\;}}
+\newcommand{\structure}[1]{\left<#1\right>}
+
+\newcommand{\valid}[1]{\mbox{\it valid}(#1)} 
+
+\newcommand{\brrs}[1]{(#1)}
+
+\renewcommand{\vec}[1]{\overline{#1}}
+\newcommand{\sdots}[0]{\!:\!}
+\newcommand{\outp}[2]{#1\!\left<#2\right>\!}
+
+%% equivalences
+
+\newcommand{\rel}{\ensuremath{\mathcal{R}}\xspace}
+
+%% Comm Conversions
+\newcommand{\eqcc}{\ensuremath{\simeq_{c}}\xspace}
+\newcommand{\typconp}{\eqcc}
+\newcommand{\typcons}{\eqcc}
+\newcommand{\lessp}{\vspace{-0.1cm}}
+\newcommand{\morep}{\vspace{-0.1cm}\\------------------&--&------------------\vspace{-0.1cm}}
+
+
+%\newtheorem{theorem}{Theorem}[section]
+%\newtheorem{remark}[theorem]{Remark}
+
+\newtheorem{nota}[theorem]{Notation}
+\newtheorem{myfact}[theorem]{Fact}
+
+
+%\newtheorem{proposition}[theorem]{Proposition}
+%\newtheorem{corollary}[theorem]{Corollary}
+%\newtheorem{example}[theorem]{Example}
+
+%\newtheorem{lemma}[theorem]{Lemma}
+
+%\newtheorem{definition}[theorem]{Definition}
+
+%% Frank's macros
+
+\newcommand{\lolli}{\mathord{\multimap}}
+\newcommand{\tensor}{\otimes}
+\newcommand{\with}{\mathbin{\binampersand}}
+
+\newcommand{\bang}{\mathbf{!}}
+
+\newcommand{\lft}[1]{{{#1}\mathsf{L}}}
+\newcommand{\rgt}[1]{{{#1}\mathsf{R}}}
+\newcommand{\cut}{\mathsf{cut}}
+\newcommand{\cpy}{\mathsf{copy}}
+\newcommand{\cutbang}{{\mathsf{cut}^\bang}}
+\newcommand{\D}{\Delta}
+\newcommand{\G}{\Gamma}
+
+\newcommand{\cpar}{{\mathsf{comp}}}
+
+
+\newcommand{\out}[1]{\langle #1\rangle}
+\newcommand{\caseop}{\mathsf{case}}
+\newcommand{\inl}{\mathsf{inl}}
+\newcommand{\inr}{\mathsf{inr}}
+
+\newcommand{\ext}{\leadsto}
+\newcommand{\Red}{\Rightarrow}
+\newcommand{\ov}[1]{\overline{#1}}
+
+\newcommand{\ednote}[1]{\message{ednote!}\footnote{\it[#1\/]}}
+
+\newenvironment{rules}{%
+\[\renewcommand{\arraystretch}{3.5}%
+\begin{array}{c}}%
+{\end{array}\]}
+\newenvironment{proofenv}{\trivlist \item[\hskip \labelsep{\it
+    Proof.}]}{\hfill$\Box$ \endtrivlist}
+
+\newcommand{\Ende}{\hfill\rule{1ex}{1ex}{\vspace{1ex}}}
+
+\newcommand{\Endp}{\Ende{}}
+
+\newcommand{\DILL}{\texttt{DILL}\xspace}
+\newcommand{\ILL}{\texttt{ILL}}
+
+% \newcommand{\ccat}[3]{C_{#1}^{#2\leftrightarrow #3}}
+\newcommand{\ccat}[3]{\mathit{id}_#1(#2,#3)}
+
+\renewcommand{\proof}{\noindent{\it Proof. }}
+
+\newcommand{\lol}[0]{\lolli} 
+
+\newcommand{\cbox}[1]{\vspace{1ex}\centerline{#1}\vspace{1ex}} 
+
+
+%%% =========== begin commands by jorge
+
+\newcommand{\seq}{\ensuremath{\mathcal{S}}\xspace}
+\newcommand{\tybis}{\ensuremath{\approx}\xspace}
+
+\newcommand{\relind}[4]{\ensuremath{#1 \vdash #3 \, \rel \,  #4\,{::}\,#2}}
+\newcommand{\trelind}[4]{\ensuremath{#1 \vdash #3 \tybis   #4\,{::}\,#2}}
+
+\newcommand{\relindalt}[4]{\ensuremath{#3 \, \rel_{\, #1 \vdash #2}\, #4}}
+
+\newcommand{\tra}[1]{\xrightarrow{#1}}
+\newcommand{\wtra}[1]{\stackrel{#1}{\Longrightarrow}}
+
+%\newcommand{\tconf}[1]{\ensuremath{\mathcal{I}_{#1} \rhd P{::}T}}
+%\newcommand{\tconf}[1]{\ensuremath{\mathcal{I}_{#1} \rhd P{::}T}}
+
+
+%% logical relations
+
+\newcommand{\til}[1]{\widetilde{#1}}
+%\newcommand{\closet}[2]{\ensuremath{\mathcal{C}^{\til{#1}}_{#2}}}
+\newcommand{\closet}[2]{\ensuremath{\mathcal{C}_{#2}}}
+
+
+\newcommand{\lr}[1]{\ensuremath{\mathcal{L}[#1]}}
+%\newcommand{\TER}{\ensuremath{\mathsf{TER}}\xspace}
+\newcommand{\TER}{\ensuremath{\mathord{\Downarrow}}}
+\newcommand{\lrc}[1]{\ensuremath{\mathcal{L}^{\Diamond}[#1]}}
+\newcommand{\CONF}{\ensuremath{\mathord{\Diamond}}}
+
+\newcommand{\sr}[1]{\ensuremath{\Mapsto \{ #1\}}}
+\newcommand{\sepp}{\ensuremath{\,\,|\,\,}}
+\newcommand{\redd}{\tra{~~~}}
+\newcommand{\repp}{\equiv_{!}}
+\newcommand{\cont}[1]{\ensuremath{#1^{\bullet}}}
+
+% The classic encoding notation. The second parameter serves to 'decorate' it.
+\newcommand{\os}{[\![}
+\newcommand{\cs}{]\!]}
+\newcommand{\encp}[2]{\os #1 \cs^{#2}}
+
+\newcommand{\on}{(\!|}
+\newcommand{\cn}{|\!)}
+\newcommand{\encn}[2]{\on #1 \cn^{#2}}
+
+%%% ========= end commands by jorge
+
+
+% Width
+%\addtolength{\hoffset}{-0.25mm}
+%\addtolength{\textwidth}{5mm}
+%\addtolength{\voffset}{-0.3mm}
+%\addtolength{\textheight}{6mm}
+
+%\longg{\title{Termination in Session-Based Concurrency via Linear Logical Relations (Extended Version)\thanks{October 16, 2011, Revised \today}}}{\title{Termination in Session-Based Concurrency via Linear Logical Relations}}
+%\longg{\titlerunning{Termination in Session-Based Concurrency  (Extended Version - \today)}}{}
+
+\longg{\title{Linear Logical Relations for Session-Based Concurrency (Extended Version)\thanks{October 16, 2011, Revised \today}}}{\title{Linear Logical Relations for Session-Based Concurrency}}
+\longg{\titlerunning{Linear Logical Relations for Session-Based Concurrency (\today)}}{}
+
+
+% (Draft of \today)}
+
+\author{Jorge A. P\'{e}rez\inst{1} \and Lu\'\i{}s Caires\inst{1} \and Frank Pfenning\inst{2} \and Bernardo Toninho\inst{1,2}}
+\institute{CITI and Departamento de Inform\' atica, FCT, Universidade Nova de Lisboa \and Computer Science Department, Carnegie Mellon University }
+\begin{document}
+\pagestyle{headings}  
+
+\maketitle
+%
+%\vspace{-4mm}
+\begin{abstract}\small
+In prior work we proposed an interpretation of intuitionistic linear logic propositions as session types
+for concurrent processes.
+The type system obtained from the interpretation ensures fundamental  properties of session-based typed 
+dis\-ci\-plines---most notably, type preservation, session fidelity, and global progress. 
+In this paper, we complement and strengthen these results by developing a theory of
+logical relations. %  for our language. 
+Our development is based on,
+and is remarkably similar to, that for functional languages, extended to
+an (intuitionistic) linear type structure.
+A main result is that well-typed processes always terminate (strong normalization).
+We also introduce a notion of observational equivalence for session-typed processes.
+As applications, % of our results,
+we prove that all proof conversions
+induced by the logic interpretation actually express observational equivalences, % on processes, 
+and explain how 
+type isomorphisms resulting from linear logic equivalences 
+are realized by coercions between interface types of session-based concurrent systems.
+\end{abstract}
+
+%In prior work we have proposed an interpretation of (intuitionistic) linear logic propositions as session types.
+%The type system obtained from the interpretation ensures fundamental  properties of session-based typed 
+%disciplines---most notably, subject reduction and global progress. 
+%In this paper, we complement and strengthen these results and show that well-typed processes always terminate.
+%Our proof uses logical relations, extended here to the setting of a linear type structure,
+%and is remarkably similar to that for functional calculi.
+%As an application, we show that proof conversions
+%nduced by the logic interpretation actually express process equivalence,
+%with respect to a natural
+%notion of typed observational equivalence.
+
+
+\section{Introduction}
+Modern computing systems rely heavily on the concurrent communication of dis\-trib\-uted software artifacts.
+Hence, to a large extent, guaranteeing their correctness amounts to 
+ensuring consistent dialogues between these artifacts---an extremely challenging task given the 
+complex interaction patterns they usually feature. 
+\emph{Session-based concurrency} has consolidated as a foundational approach to communication correctness:
+dialogues between participants are structured into \emph{sessions},  the basic units of communication; 
+descriptions of the interaction patterns are then abstracted  as 
+\emph{session types}~\cite{DBLP:conf/esop/HondaVK98}, which are statically checked against specifications.
+These specifications are  usually given in the $\pi$-calculus~\cite{MilnerPW92a}, so we obtain
+\emph{processes} communicating through so-called session channels connecting exactly two subsystems.
+The discipline of session types ensures session protocols in which actions always occur in dual pairs: when one partner sends, the other receives; when one partner offers a selection, the other chooses; when a session terminates, no further interaction may occur. New sessions may be dynamically created by invocation of shared servers. While \emph{concurrency} arises in the simultaneous execution of sessions, \emph{mobility} 
+is present in the exchange of session and server names.
+
+%Safety: something �bad� will never happen // noting bad happens
+%Liveness: something �good� will eventually happen (but we don�t know when)
+
+In session-based concurrency, 
+typing disciplines 
+usually guarantee communication correctness 
+via  (forms of) \emph{subject reduction} and \emph{progress} properties.
+The former states that well-typed processes always evolve to well-typed processes (a \emph{safety} property);
+the latter says that well-typed processes will never run into a stuck state (a \emph{liveness} property).
+In addition to ensure that sets of interactions adhere to their prescribed behavior, 
+it is sensible to require such interactions to be \emph{finite}: 
+while from a global perspective systems are meant to run forever, 
+at a local level we would like participants which always respond within a finite amount of time,  
+and never engage into infinite internal computations.
+\emph{Termination} 
+(more commonly known as \emph{strong normalization} in the functional setting)
+is indeed  a most desirable liveness property; in session-based concurrency, it 
+may substantially improve  
+the correctness guarantees provided by 
+subject reduction and progress.
+Ensuring termination in concurrent calculi, however, is  known to be hard:
+in (variants of) the $\pi$-calculus, proofs require heavy constraints on the language and/or its types, 
+often relying on  ad-hoc machineries (see~\cite{DemangeonHS09} for a survey). 
+
+
+In the first part of this paper, we study termination in  session-based concurrency.
+The starting point is our interpretation of (intutionistic) linear logic propositions as session types~\cite{CairesP10}, which has provided the first purely logical account of session types. 
+%We briefly outline the main ideas underlying the interpretation.
+%While in the linear $\lambda$-calculus types are assigned to terms (denoting functions and values), 
+In the interpretation, types are assigned to names (denoting communication channels) and describe their session protocol.
+%More precisely, 
+This way,
+an object of type $A \lolli B$ denotes a session that first inputs a session channel of type $A$, and then behaves as $B$---another interactive behavior. 
+An object of type $A \otimes B$ denotes a session that first sends a session channel of type $A$ and then behaves as $B$.
+The $!A$ type is interpreted as a type of a shared server for sessions of type $A$. 
+The additive product and sum are interpreted as branch and choice session type operators, respectively.
+The type system distinguishes two kinds of type environments: 
+a \emph{linear} part $\Delta$ and an \emph{unrestricted} part $\Gamma$,
+where weakening and contraction principles hold for $\Gamma$ but not for $\Delta$.  
+A type judgment is then of the form $\Gamma ;\Delta \vdash P :: z{:}C$, 
+with $\G,\D$, and $z{:}C$ having pairwise disjoint domains.
+We refer to $\Gamma; \Delta$ and $z{:}C$ as the left- and right-hand side typings, respectively.
+Such a judgment  asserts: 
+process 
+$P$ implements session $C$ along channel $z$, provided it is placed in an % process 
+environment offering the sessions declared in $\G$ and $\D$.
+%$P$ is ensured to safely provide
+%a usage of name $z$ according to the behavior specified by
+%type $C$, whenever composed with any process environment providing
+%usages of names according to the behaviors specified by names in $\G;\D$.
+ The classic duality of %(binary) 
+session types is retained 
+via the multiplicative/additive nature of linear logic propositions.
+This way, e.g.,  $\otimes$  and $\lolli$ are dual in 
+that \emph{using} a session of one type (in the left-hand side typing)
+is equivalent to \emph{implementing} a type of the other (in the right-hand side typing).
+
+
+The interpretation establishes
+a tight correspondence between session types for the $\pi$-calculus and intuitionistic linear logic: typing rules correspond to %dual intuitionistic 
+linear sequent calculus proof rules and,  moreover, process reduction may be simulated %in a type preserving way 
+by proof conversions and reductions, and vice versa. As a result, we obtain subject reduction from which session fidelity follows. 
+%The typing discipline 
+The type system
+ensures global progress, beyond the restricted progress on a single session property obtained in pure session type systems.
+%The expressiveness of the type system is illustrated by examples in~\cite{pfenning12,CairesP10}.
+Examples illustrating the expressiveness of the type system can be found in~\cite{pfenning12,CairesP10}.
+%This  is significant, as progress in traditional session type systems is only ensured via complex technical machineries.
+%This is only an indication of how our logical interpretation may bring novel insights on session-based concurrency and its basic properties.
+
+
+Our main contribution  is a simple theory of logical relations for session types.
+%, for which termination is its principal application.
+The method of logical relations has proved to be extremely productive in the functional setting; 
+in fact, properties such as 
+termination, various forms of equivalence, confluence, parametricity can be established via logical relations.
+%is a proof of termination for processes which are well-typed according to the interpretation in~\cite{CairesP10}. 
+%The proof uses  the method of logical relations \cite{Statman85,Tait67}. %, well-known in the functional setting.
+In this presentation, we use logical relations to prove termination for session-typed processes.
+Although %, as mentioned above, 
+our interpretation assigns
+types to names (and not to terms, as in the typed $\lambda$-calculus), quite remarkably, 
+we are able to define \emph{linear} logical relations
+which are truly defined on the structure of types---as in logical relations for the typed $\lambda$-calculus~\cite{Statman85,Tait67}.
+A salient aspect of our proof is that it closely follows the principles of the (linear) type system.
+%without appealing to external other proof techniques.
+As hinted at above, this is in sharp contrast with known proofs of termination in the $\pi$-calculus.
+To our knowledge, ours is the first proof of termination of its kind  in the context of session-based concurrency. 
+
+Certifying termination of session-typed interacting programs is very important in practice.
+In server-client interactions, for instance, it is critical for 
+clients to be sure that running some piece of code
+provided by a server (say, code embedded in web pages of a cloud application) 
+will not cause it to get stuck indefinitely (as in a denial-of-service attack, or just due to some bug).
+%Perhaps more concretely, 
+Furthermore, 
+strengthening session-based type disciplines with termination guarantees should be highly beneficial 
+for the increasingly growing number of implementations (libraries, programming language extensions) based on session types
+%In fact, libraries and  programming language extensions which have been built upon session types 
+foundations---see, e.g.,~\cite{HuYH08,NgYPHK11,PucellaT08}.
+
+In the second part of the paper, we present
+%Additional contributions  are 
+two applications of the basic theory, which 
+bear witness to its complementarity with the other properties derived from the interpretation.
+The applications rely on a 
+notion of \emph{typed observational equivalence}, which we define following the intuitive meaning of type judgements.
+%In our first application, we study 
+The first application concerns
+the \emph{proof conversions} induced by the logic interpretation.
+In~\cite{CairesP10} a set of such conversions  was shown to correspond to either structural congruence or reduction in the $\pi$-calculus.
+The conversions we study here (not considered  in~\cite{CairesP10})
+cannot be explained similarly:
+%in the process side, 
+they induce forms of ``prefix commutation'' on typed processes which appear rather counterintuitive. 
+We prove \emph{soundness} of the proof conversions with respect to the observational equivalence, i.e.,
+processes  induced by proof conversions are shown to be observationally equivalent.
+This result thus elegantly explains
+%how the framework derived from the logic interpretation is informative enough so as to explain 
+ subtle forms of causality 
+ that arise 
+ in the (interleaved) execution of concurrent sessions. 
+In our second application, 
+we explain how \emph{type isomorphisms} resulting from linear logic equivalences are realized by coercions 
+between interface types of session-based concurrent systems.
+We provide  a simple behavioral characterization of these isomorphisms, by relying on typed observational equivalence.
+Type isomorphisms can be seen as a validation of our interpretation with respect to basic linear logic principles.
+%For instance, the interpretation of $A \otimes B$ as described above may appear asymmetric; 
+%by exhibiting an appropriate type isomorphism we show that it is indeed symmetric.
+For instance, the apparent asymmetry in the interpretation of $A \otimes B$ 
+is clarified here via an appropriate isomorphism.
+The two applications thus shed further light on the relationship between
+linear logic propositions and structured communications.
+Termination is central to both of them, 
+intuitively because in the bisimulation game 
+strong transitions 
+can be matched by 
+weak transitions which are always finite.
+
+The rest of the paper is structured as follows.
+Section~\ref{sec:proc-model} presents our process model, a synchronous $\pi$-calculus with guarded choice.
+Section~\ref{sec:interp} recalls the 
+type system derived from the logical interpretation and 
+%interpretation of session types as intuitionistic linear logic propositions and  
+main results from~\cite{CairesP10}.
+Section~\ref{sec:term} presents linear logical relations and the termination result.
+%Termination of well-typed processes is discussed in Section.
+Section~\ref{sec:typeq} introduces a typed observational equivalence for processes.
+Section~\ref{sec:comm} 
+discusses 
+soundness of proof conversions and type isomorphisms.
+Section~\ref{sec:relwork} discusses related work and Section~\ref{sec:concl} collects  final remarks. 
+\longg{\\ Most proofs have been moved to the Appendix.}{
+%Omitted proofs and definitions can be found in the online appendix~\cite{onlineapp}.
+}
+
+
+\section{Process Model: Syntax and Semantics}\label{sec:proc-model}
+We introduce the syntax and operational semantics of the
+synchronous $\pi$-calculus~\cite{sangiorgi-walker:book} extended with (binary) guarded choice.
+
+\begin{definition}[Processes] 
+Given an infinite set $\Names$ of {\em names} $(x,y,z,u,v)$, 
+the set of {\em processes} $(P,Q,R)$ is  defined by
+$$ 
+\begin{array}{lcllllllllllllllllllllllllll}
+  P & ::= & \mathbf{0} &    \; | \; & P \para Q   
+  & \; | \;&  (\nub y)P  &  
+  \; | \; &\outp{x}{y} .P
+  & \; | \;& x(y).P   & \; | \; & \bang x(y).P\\
+  &&&&&\; | \; & \linkr{x}{y}& \; | \;& x.\mathtt{inl};P 
+  & \; | \; & x.\mathtt{inr};P & \; | \;& x.\mathtt{case}(P,Q)
+\end{array}
+$$
+%
+\end{definition}
+The operators $\zero$ (inaction), $P\para Q$ (parallel composition),
+and $(\nub y)P$ (name restriction) comprise the static fragment of any
+$\pi$-calculus. We then have $\outp{x}{y} .P $ (send name $y$ on $x$ and
+proceed as $P$), $\inp{x}{y}P $ (receive a name $z$ on $x$ and proceed
+as $P$ with parameter $y$ replaced by $z$), and $ \bang
+x(y).P$ which denotes replicated (persistent) input. 
+The forwarding construct $\linkr{x}{y}$ equates names $x$ and $y$; 
+it is a primitive representation of a copycat process, 
+akin to the link processes used in internal mobility encodings of name passing~\cite{DBLP:journals/tcs/Boreale98}.
+Also, this construct allows for a simple identity axiom in the type system~\cite{Toninho2011}.
+The remaining three operators define a minimal labeled choice mechanism, comparable
+to the $n$-ary branching constructs found in standard session
+$\pi$-calculi (see, e.g.,~\cite{DBLP:conf/esop/HondaVK98}). 
+%For the sake of minimality and w
+Without loss of generality we restrict our model to
+binary choice.
+%
+In restriction $(\nub y)P$ and input $x(y).P$ the distinguished
+occurrence of name $y$ is binding, with scope  $P$.
+The set of
+{\em free names} of a process $P$ is denoted $\fn{P}$. 
+A process is {\em closed} if it does not
+contain free occurrences of names.  We identify process
+up to consistent renaming of bound names, writing $\equiv_{\alpha}$
+for this congruence.
+We write
+$P\subst{x}{y}$ for the %process obtained from $P$ by 
+capture-avoiding
+substitution of  $x$ for  $y$ in $P$.
+%
+While \emph{structural congruence} expresses basic identities on the structure of
+processes, \emph{reduction} 
+expresses the behavior of processes.
+%specifies the computations a process performs on its own.
+%By definition, reduction is closed  under structural congruence.
+%
+\begin{definition}
+  \label{def:struct-cong} {\em Structural congruence} ($P \equiv Q$)
+  is the least congruence relation on processes such that$$
+\begin{array}{llllllllllllllll}
+  P \para \zero  \equiv P &  & \;\; &
+  P \equiv_{\alpha} Q \Rightarrow P \equiv Q &  \\
+  P \para Q \equiv Q \para P  & & &
+  P \para (Q \para R) \equiv (P \para Q) \para R & \\
+  (\nub x)\zero \equiv \zero & & &
+  x\not\in\fn{P} \Rightarrow P \para (\nub x)Q \equiv (\nub x)(P \para Q)  & \\
+  (\nub x)(\nub y)P \equiv (\nub y)(\nub x)P \quad&  & & \linkr{x}{y} \equiv \linkr{y}{x} &\\
+\end{array}$$
+\end{definition}
+%N.B.: $P\equiv Q$ implies $\fn P = \fn Q$.
+%
+\begin{definition}
+  \label{def:reduction} {\em Reduction} ($P\red Q$) is the binary relation on processes defined by: 
+%$$
+%\begin{array}{llllllllll}
+%\send{x}{y}.Q\para \inp{x}{z}{P} \red Q\para P\subst{y}{z} & 
+%\name{RC} \\
+%\send{x}{y}.Q\para \bang \inp{x}{z}{P} \red Q\para P\subst{y}{z} \para \bang \inp{x}{z}{P} \hspace{1.0cm} & 
+%\name{R$\bang$}\\ 
+%(\nu x)(\linkr{x}{y} \para P) \red P\subst{y}{x} ~~~(x\neq y)& 
+%\name{R$\leftrightarrow$} \\
+%x.\mathtt{inl};P \para x.\mathtt{case}(Q,R) \red P \para Q & 
+%\name{RL} \\
+%x.\mathtt{inr};P \para x.\mathtt{case}(Q,R) \red P \para R & 
+%\name{RR}\\ 
+%Q\red Q'\Rightarrow P \para Q \red P \para Q' & \name{R$|$} \\
+%P\red Q\Rightarrow(\nub y)P\red(\nub y)Q & \name{R$\nub$}\\
+%P\equiv P'\aand P'\red Q'\aand Q'\equiv Q\Rightarrow P\red Q &
+%\name{R$\equiv$}
+%\end{array}
+%$$
+$$
+\begin{array}{lcl}
+\send{x}{y}.Q\para \inp{x}{z}{P} \red Q\para P\subst{y}{z} &  & \send{x}{y}.Q\para \bang \inp{x}{z}{P} \red Q\para P\subst{y}{z} \para \bang \inp{x}{z}{P} \\
+(\nu x)(\linkr{x}{y} \para P) \red P\subst{y}{x} ~~(x\neq y)~~~ & &
+Q\red Q'\Rightarrow P \para Q \red P \para Q'  \\
+P\red Q\Rightarrow(\nub y)P\red(\nub y)Q & & 
+P\equiv P'\aand P'\red Q'\aand Q'\equiv Q\Rightarrow P\red Q \\
+x.\mathtt{inr};P \para x.\mathtt{case}(Q,R) \red P \para R & &
+x.\mathtt{inl};P \para x.\mathtt{case}(Q,R) \red P \para Q \\
+\end{array}
+$$
+\end{definition}
+
+\begin{figure}[t]
+ $$
+\begin{array}{ccccc}
+\inferrule[\name{$\mathsf{out}$}]{}{x \out y.P \tra{x \out y} P}
+\hspace{0.6cm}
+\inferrule[\name{$\mathsf{in}$}]{}{x(y).P \tra{x(z)} P \subst{z}{y}}
+\hspace{0.6cm}
+\inferrule[\name{$\mathsf{id}$}]{}{(\nu x)(\linkr{x}{y} \para P) \tra{\tau}  P\subst{y}{x}} 
+\vspace{0.2cm}
+\\
+\inferrule[\name{$\mathsf{par}$}]{P \tra{\alpha} Q}{P\para R \tra{\alpha} Q \para R}
+\hspace{0.6cm} 
+\inferrule[\name{$\mathsf{com}$}]{P\tra{\overline{\alpha}} P' \;\;\; Q \tra{\alpha} Q'} {P \para
+  Q \tra{\tau} P' \para Q'}
+\hspace{0.6cm}
+\inferrule[\name{$\mathsf{res}$}]{P \tra{\alpha} Q} {(\nub y)P \tra{\alpha} (\nub y)Q}
+\vspace{0.2cm}
+\\
+\inferrule[\name{$\mathsf{open}$}]{P \tra{\overline{x\out y}} Q} {(\nub y)P \tra{\overline{(\nub
+      y)x\out y}} Q}
+\hspace{0.5cm}
+\inferrule[\name{$\mathsf{close}$}]{P \tra{\overline{(\nub y)x\out y}} P' \;\;\; Q \tra{x(y)} Q'}
+{P \para Q \tra{\tau} (\nub y)(P' \para Q')}
+\hspace{0.5cm}
+\inferrule[\name{$\mathsf{rep}$}]{}{\bang x(y).P \tra{x(z)} P \subst{z}{y}\para \bang x(y).P}
+\vspace{0.2cm} \\
+\inferrule[\name{$\mathsf{lout}$}]{}{x.\mathtt{inl};P \tra{ \overline{x.\inl} } P}
+\hspace{0.4cm}
+\inferrule[\name{$\mathsf{rout}$}]{}{x.\mathtt{inr};P \tra{ \overline{x.\inr} } P}
+\hspace{0.4cm}
+\inferrule[\name{$\mathsf{lin}$}]{}{x.\mathtt{case}(P,Q) \tra{x.\inl} P}
+\hspace{0.4cm}
+\inferrule[\name{$\mathsf{rin}$}]{}{x.\mathtt{case}(P,Q) \tra{x.\inr} Q}
+\end{array}
+\vspace{-2ex}
+$$
+\caption{\label{fig:LTS}$\pi$-calculus Labeled Transition System.}
+\vspace{-2ex}
+\end{figure}
+
+%\begin{figure}[t]
+% $$
+%\begin{array}{ccccc}
+%\vspace{0.2cm}
+%\outp{x}{y}.P \tr{}{ \overline{x\out y}}{} P
+%\; \name{$\mathsf{out}$}
+%\hspace{0.5cm}
+%x(y).P \tr{}{x(z)}{} P \subst{z}{y}
+%\; \name{$\mathsf{in}$} 
+%\hspace{0.5cm}
+%(\nu x)(\linkr{x}{y} \para P) \tr{}{\tau}{}  P\subst{y}{x} \; \name{$\mathsf{id}$}
+%\\
+%\displaystyle
+%\frac{P \tr{}\alpha{} Q
+%} {P\para R \tr{}{\alpha}{} Q \para R}
+%\name{$\mathsf{par}$}
+%\hspace{0.5cm} 
+%\displaystyle
+%\frac{P
+%  \tr{}{\overline{\alpha}}{} P' \;\;\; Q \tr{}{\alpha}{} Q'} {P \para
+%  Q \tr{}{\tau}{} P' \para Q'}
+%\name{$\mathsf{com}$}\vspace{0.2cm}
+%\hspace{0.5cm}
+%\displaystyle
+%\frac{P \tr{}{\alpha}{} Q} {(\nub y)P \tr{}{\alpha}{} (\nub y)Q}
+%\name{$\mathsf{res}$}
+%\\
+%\displaystyle
+%\frac{P \tr{}{\overline{x\out y}}{} Q} {(\nub y)P \tr{}{\overline{(\nub
+%      y)x\out y}}{} Q}
+%\;\name{$\mathsf{open}$}
+%\hspace{0.6cm}
+%\displaystyle\frac{P
+%  \tr{}{\overline{(\nub y)x\out y}}{} P' \;\;\; Q \tr{}{x(y)}{} Q'}
+%{P \para Q \tr{}{\tau}{} (\nub y)(P' \para Q')}
+%\;\name{$\mathsf{close}$}
+%\vspace{0.2cm}
+%\\
+%\bang x(y).P \tr{}{x(z)}{} P \subst{z}{y}\para \bang x(y).P
+%\; \name{$\mathsf{rep}$}
+%\hspace{0.6cm}
+%x.\mathtt{inl};P \tr{}{ \overline{x.\mathtt{inl}} }{} P
+%\; \name{$\mathsf{lout}$}
+%\vspace{0.2cm}\\
+%%
+%x.\mathtt{inr};P \tr{}{ \overline{x.\mathtt{inr}} }{} P
+%\; \name{$\mathsf{rout}$}
+%\hspace{0.4cm}
+%x.\mathtt{case}(P,Q) \tr{}{x.\mathtt{inl}}{} P
+%\; \name{$\mathsf{lin}$}
+%\hspace{0.4cm}
+%x.\mathtt{case}(P,Q) \tr{}{x.\mathtt{inr}}{} Q
+%\; \name{$\mathsf{rin}$}
+%\end{array}
+%\vspace{-2ex}
+%$$
+%\caption{\label{fig:LTS}$\pi$-calculus Labeled Transition System.}
+%\vspace{-2ex}
+%\end{figure}
+By definition, reduction is closed  under $\equiv$. %structural congruence.
+It specifies the computations a process performs on its own. 
+%Notice how the intention with the renaming construct is to ``re-implement'' a given session name on a different one.
+ To characterize the interactions of a process with its environment, we extend
+%introduce a labeled transition system; 
+the % standard 
+early transition system for the
+$\pi$-calculus~\cite{sangiorgi-walker:book} with 
+labels and transition rules for the choice and forwarding constructs.  A transition
+$\tr{P}{\alpha}{Q}$ denotes that %process 
+$P$ may evolve to %process 
+$Q$
+by performing the action represented by label $\alpha$. 
+%Transition labels
+Labels 
+are given by
+$$
+\alpha ::= x(y) \sep \ov{x\out y} \sep  \ov{(\nu y) x\out y} \sep
+x.\inl \sep \ov{x.\inl} \sep  x.\inr \sep \ov{x.\inr} \sep \tau 
+$$
+Actions are input $x(y)$, the left/right offers
+$x.\inl$ and $ x.\inr$, and their matching co-actions,
+respectively the output $\ov{x\out y}$ and bound output $\ov{(\nub y)
+  x\out y}$ actions, and the left/ right selections
+$\vec{x.\inl}$ and $\vec{x.\inr}$. The bound output
+$\vec{(\nub y) x\out y}$ denotes extrusion of a fresh name $y$
+along (channel) $x$. Internal action is denoted by $\tau$. 
+In general, an action
+$\alpha$ ($\ov \alpha$) requires a matching $\vec \alpha$
+($\alpha$) in the environment to enable progress, as specified by the transition rules. For a label
+$\alpha$, we define the sets $\fn \alpha$ and $\bn \alpha$ of free
+and bound names, respectively, as usual.
+We denote by $s(\alpha)$ the subject of $\alpha$ (e.g., $x$ in $x\out y$).
+\begin{definition}[Labeled Transition System]\label{def:lts} 
+  The relation \emph{labeled transition} ($\tr{P}{\alpha}{Q}$) is defined
+  by the rules in Fig.~\ref{fig:LTS}, subject to the side
+  conditions: in rule $(\mathsf{res})$, we require $y\not\in\fn{\alpha}$; in rule
+  $(\mathsf{par})$, we require $\bn{\alpha} \cap \fn{R} = \emptyset$; in rule
+  $(\mathsf{close})$, we require $y\not\in\fn{Q}$. We omit the symmetric versions
+  of rules $(\mathsf{par})$, $(\mathsf{com})$, and $(\mathsf{close})$.
+\end{definition} 
+%
+We write $\rho_1
+\rho_2$ for the composition of relations $\rho_1, \rho_2$.
+%(e.g. $\tr{}{\taub}{} \equiv$).
+Weak transitions are defined as usual: 
+we write $\wtra{}$ for the reflexive, transitive closure of
+$\tra{\tau}$. 
+Given $\alpha \neq \tau$, notation $\wtra{\alpha}$ stands for $\wtra{~}\tra{\alpha}\wtra{~}$ and 
+$\wtra{\tau}$ stands for $\wtra{}$.
+We recall some basic facts about reduction, structural congruence,
+and labeled transition: closure of labeled transitions under
+structural congruence, and coincidence of $\tau$-labeled transition
+and reduction~\cite{sangiorgi-walker:book}: (1) if $P
+\equiv\tra{\alpha}Q$ then $P \tra{\alpha}\equiv Q$, and (2)
+$P\to Q$ if and only if $P \tra{\tau} \equiv Q$.  
+
+
+\section{Session Types as Dual Intutionistic Linear Logic Propositions}\label{sec:interp}
+
+%We now summarize the basic framework and results of the interpretation, based on \cite{CairesP10}.
+%We also introduce the commuting conversions.
+
+%\paragraph{Type System.}\label{ss:type-system}
+
+
+\longg{
+\begin{figure}[t]
+$$
+\begin{array}{c}
+\inferrule[\name{T$\mathsf{id}$}]{\mathstrut}{\Gamma; x{:}A \vdash \linkr{x}{z} :: z{:}A}
+\hspace{0.4cm}
+\inferrule[\name{T$\lft\one$}]{\Gamma;\Delta \vdash P :: T}
+{\Gamma;\Delta, x{:}\mathbf{1} \vdash P :: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\one$}]{\mathstrut}{\Gamma ; \cdot \vdash \zero :: x{:} \mathbf{1}}
+\vspace{0.3cm}\\
+\inferrule[\name{T$\lft\otimes$}]{\Gamma ; \Delta, y{:}A, x{:}B \vdash P :: T}
+{\Gamma; \Delta, x{:} A\otimes B \vdash x(y).P :: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\otimes$}]{\Gamma; \Delta \vdash P :: y{:}A\;\;\;\Gamma; \Delta'\vdash Q:: x{:}B}
+{\Gamma; \Delta, \Delta' \vdash (\nu y)x\out y.(P\para Q) :: x{:}A\otimes B}
+\vspace{0.3cm}\\
+\inferrule[\name{T$\lft\lolli$}]{\Gamma; \Delta \vdash P :: y{:}A\;\;\;\; \Gamma; \Delta', x{:}B\vdash Q:: T}
+{\Gamma; \Delta, \Delta', x{:} A\lol B \vdash  (\nu y)x\out y. (P\para Q):: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\lolli$}]{\Gamma; \Delta, y{:}A \vdash P:: x{:}B}
+{\Gamma; \Delta \vdash x(y).P :: x{:} A \lol B}
+\vspace{0.3cm}\\
+\inferrule[\name{T$\cut$}]{\Gamma; \Delta\vdash P :: x{:}A\;\;\; \Gamma; \Delta', x{:}A \vdash Q::T}
+{\Gamma; \Delta, \Delta' \vdash (\nu x)(P\para Q):: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\cutbang$}]{\Gamma; \cdot\vdash P :: y{:} A\;\;\; \Gamma, u{:}A; \Delta \vdash Q::T}
+{\Gamma; \Delta\vdash (\nu u)(\bang u(y).P\para Q):: T}
+\vspace{0.3cm}
+\\
+\inferrule[\name{T$\lft\bang$}]{\Gamma, u{:} A ; \Delta \vdash P\subst{u}{x} :: T}
+{\Gamma; \Delta, x{:}\bang A \vdash P:: T}
+\hspace{0.4cm}
+\inferrule[\;\name{T$\cpy$}]{\Gamma, u{:}A;  \Delta, y{:}A \vdash P:: T}
+{\Gamma, u{:}A; \Delta \vdash (\nu y)u\out y.P:: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\bang$}]{\Gamma; \cdot \vdash Q:: y{:}A}
+{\Gamma; \cdot  \vdash \bang x(y).Q:: x{:}\bang A}\;
+\vspace{0.3cm}\\
+\inferrule[\name{T$\lft\oplus$}]{\Gamma; \Delta, x{:}A \vdash P:: T \;\;\; \Gamma;  \Delta, x{:}B \vdash Q :: T}
+{\Gamma; \Delta, x{:}A\oplus B \vdash x.\mathtt{case}(P,Q):: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\with$}]{\Gamma; \Delta\vdash P:: x{:}A \;\;\; \Gamma; \Delta \vdash Q :: x{:}B}
+{\Gamma; \Delta \vdash x.\mathtt{case}(P,Q):: x{:}A \with B}
+\vspace{0.3cm}\\
+\inferrule[\name{T$\lft\with_1$}]{\Gamma; \Delta, x{:}A \vdash P:: T}
+{\Gamma; \Delta, x{:}A\with B  \vdash x.\mathtt{inl};P:: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\oplus_1$}]{\Gamma; \Delta \vdash P:: x{:}A}
+{\Gamma; \Delta \vdash x.\mathtt{inl};P::x{:}A\oplus B}
+\vspace{0.3cm}
+\\
+\inferrule[\name{T$\lft\with_2$}]{\Gamma; \Delta, x{:}B \vdash P:: T}
+{\Gamma; \Delta, x{:}A\with B  \vdash x.\mathtt{inr};P:: T}
+\hspace{0.4cm}
+\inferrule[\name{T$\rgt\oplus_2$}]{\Gamma; \Delta \vdash P:: x{:}B}
+{\Gamma; \Delta \vdash x.\mathtt{inr};P::x{:}A\oplus B}
+\end{array}
+\vspace{-2ex}
+$$
+\caption{\label{fig:type-system}The Type System $\pi\DILL$.}
+\vspace{-2ex}
+\end{figure}
+}{
+\begin{figure}[t]
+$$
+\begin{array}{c}
+\displaystyle
+\frac{}
+{\Gamma; x{:}A \vdash \linkr{x}{z} :: z{:}A}\;\name{T$\mathsf{id}$}
+\hspace{0.3cm}
+\frac{\Gamma;\Delta \vdash P :: T}
+{\Gamma;\Delta, x{:}\mathbf{1} \vdash P :: T}\;\name{T$\one$L}
+\hspace{0.3cm}
+\frac{\mathstrut}{\Gamma ; \cdot \vdash \zero :: x{:} \mathbf{1}}\;\name{T$\one$R}
+\vspace{0.3cm}\\
+\displaystyle\frac{\Gamma ; \Delta, y{:}A, x{:}B \vdash P :: T}
+{\Gamma; \Delta, x{:} A\otimes B \vdash x(y).P :: T}\;\name{T$\otimes$L}
+%\frac{\Delta \vdash P :: y:A\;\;\;\; \Delta'\vdash Q:: x:B}
+%{\Delta, \Delta' \vdash x\!\left<y\right>.(P\para Q) :: x:A\otimes B}
+\hspace{0.3cm}
+\frac{\Gamma; \Delta \vdash P :: y{:}A\;\;\;\Gamma; \Delta'\vdash Q:: x{:}B}
+{\Gamma; \Delta, \Delta' \vdash (\nu y)x\out y.(P\para Q) :: x{:}A\otimes B}
+\;\name{T$\otimes$R}
+\vspace{0.3cm}\\
+\displaystyle\frac{\Gamma; \Delta \vdash P :: y{:}A\;\;\;\; \Gamma; \Delta', x{:}B\vdash Q:: T}
+{\Gamma; \Delta, \Delta', x{:} A\lol B \vdash  (\nu y)x\out y. (P\para Q):: T}
+\;\name{T$\lolli$L}
+\hspace{0.3cm}
+%\frac{\Delta \vdash P :: y:A\;\;\; \Delta', x:B \vdash Q:: T}
+%{\Delta, \Delta', x:: A -\!\!\circ B \vdash  x\!\left<y\right>.(P\para Q):: T}
+%\hspace{1.0cm}
+\frac{\Gamma; \Delta, y{:}A \vdash P:: x{:}B}
+{\Gamma; \Delta \vdash x(y).P :: x{:} A \lol B}
+\;\name{T$\lolli$R}
+\vspace{0.3cm}\\
+\displaystyle\frac{\Gamma; \Delta\vdash P :: x{:}A\;\;\; \Gamma; \Delta', x{:}A \vdash Q::T}
+{\Gamma; \Delta, \Delta' \vdash (\nu x)(P\para Q):: T}\,\name{T$\cut$}
+\hspace{0.2cm}
+\frac{\Gamma; \cdot\vdash P :: y{:} A\;\;\; \Gamma, u{:}A; \Delta \vdash Q::T}
+{\Gamma; \Delta\vdash (\nu u)(\bang u(y).P\para Q):: T}\,\name{T$\cutbang$}
+\vspace{0.3cm}\\
+\displaystyle\frac{\Gamma, u{:}A;  \Delta, y{:}A \vdash P:: T}
+{\Gamma, u{:}A; \Delta \vdash (\nu y)u\out y.P:: T}\;\name{T$\cpy$}
+\vspace{0.3cm}\\
+\displaystyle
+\frac{\Gamma, u{:} A ; \Delta \vdash P\subst{u}{x} :: T}
+{\Gamma; \Delta, x{:}\bang A \vdash P:: T}\;\name{T$\bang$L}
+\hspace{0.3cm}
+\frac{\Gamma; \cdot \vdash Q:: y{:}A}
+{\Gamma; \cdot  \vdash \bang x(y).Q:: x{:}\bang A}\;\name{T$\bang$R}
+%\hspace{1.0cm}
+%\frac{\Gamma, x:A ; \Delta \vdash P\subst{y}{x}:: T}
+%{\Gamma,x:A, y:A ; \Delta \vdash P:: T}\;\;(!S)
+\vspace{0.3cm}\\
+\displaystyle
+\frac{\Gamma; \Delta, x{:}A \vdash P:: T \;\;\; \Gamma;  \Delta, x{:}B \vdash Q :: T}
+{\Gamma; \Delta, x{:}A\oplus B \vdash x.\mathtt{case}(P,Q):: T}
+\,\name{T$\oplus$L}
+\hspace{0.2cm}
+\frac{\Gamma; \Delta\vdash P:: x{:}A \;\;\; \Gamma; \Delta \vdash Q :: x{:}B}
+{\Gamma; \Delta \vdash x.\mathtt{case}(P,Q):: x{:}A \with B}
+\,\name{T$\with$R}
+\vspace{0.3cm}\\
+\displaystyle
+\frac{\Gamma; \Delta, x{:}A \vdash P:: T}
+{\Gamma; \Delta, x{:}A\with B  \vdash x.\mathtt{inl};P:: T}
+\;\name{T$\with$L$_1$}
+\hspace{0.3cm}
+\displaystyle
+\frac{\Gamma; \Delta \vdash P:: x{:}A}
+{\Gamma; \Delta \vdash x.\mathtt{inl};P::x{:}A\oplus B}
+\;\name{T$\oplus$R$_1$}
+\vspace{0.3cm}
+\\
+\displaystyle
+\frac{\Gamma; \Delta, x{:}B \vdash P:: T}
+{\Gamma; \Delta, x{:}A\with B  \vdash x.\mathtt{inr};P:: T}
+\;\name{T$\with$L$_2$}
+\hspace{0.3cm}
+\frac{\Gamma; \Delta \vdash P:: x{:}B}
+{\Gamma; \Delta \vdash x.\mathtt{inr};P::x{:}A\oplus B}
+\;\name{T$\oplus$R$_2$}
+\end{array}
+\vspace{-2ex}
+$$
+\caption{\label{fig:type-system}The Type System $\pi\DILL$.}
+\vspace{-2ex}
+\end{figure}}
+
+%
+%
+%% Rules long version
+
+As anticipated in the introduction, the type structure coincides with
+intuitionistic linear logic~\cite{DBLP:conf/tapsoft/GirardL87,BP:97},
+omitting atomic formulas and the additive constants $\top$ and
+${\bf 0}$.
+
+\begin{definition}[Types] \label{d:types}Types $(A,B,C)$ are given by 
+
+\cbox{$
+\begin{array}{lcccccccccccc}
+A,B & ::= & \one & | & ! A &   |   & A \otimes B 
+ &  | & A \lol B   &   |   & A\; \binampersand\; B  & | &  A \oplus  B
+\end{array}
+$}
+\vspace{-1ex}
+\end{definition}
+Types are assigned to (channel) names, and are %may be conveniently
+interpreted as a form of session types; an assignment $x{:}A$ 
+enforces the use of name $x$ according to discipline
+$A$. $A\otimes B$  types  a session channel that first performs
+an output to its partner (sending a session channel of type $A$) 
+before proceeding as specified by $B$.  %In a similar way, 
+Similarly, 
+$A \lolli B$ types a session channel
+that first performs an input from its partner (receiving a session channel of type $A$) 
+before proceeding as specified by $B$. Type
+$\one$ means that the session terminated, no further interaction will
+take place on it; names of type $\one$ may still be passed
+around in sessions, as opaque values.  
+ $A \binampersand B$ types a session channel that offers its
+partner a choice between an $A$ behavior (``left'' choice)
+and a $B$ behavior (``right'' choice). 
+Dually,
+$A \oplus B$ types a session
+that either selects ``left'' and then proceeds as specified by $A$, or
+else selects ``right'', and then proceeds as specified by $B$. 
+Type $\bang A$ types a shared (non-linearized) channel, 
+%(called \emph{standard channel} in \cite{DBLP:journals/acta/GayH05}), 
+to be
+used by a server for spawning an arbitrary number of new sessions
+(possibly none), each one conforming to type $A$.
+%
+
+A type environment is a collection of type assignments of the form
+$x{:}A$, where $x$ is a name and $A$ a type, the names being pairwise disjoint.  
+%Following the insights behind dual intuitionistic linear logic, 
+%which goes back to Andreoli's \emph{dyadic} system for classical linear logic \cite{Andreoli92}, 
+Two kinds of type environments are subject to different structural properties: a
+\emph{linear} part $\Delta$ and an \emph{unrestricted} part $\Gamma$,
+where weakening and contraction principles hold for $\Gamma$ but not
+for $\Delta$.  A type judgment %of our system 
+is of the form $\Gamma ; \Delta \vdash P :: z{:}C$ where name declarations in $\Gamma$ are
+always propagated unchanged to all premises in the typing rules, while
+name declarations in $\Delta$ are handled multiplicatively or
+additively, depending on the nature of the type being defined. The
+domains of $\G,\D$ and $z{:}C$ are required to be pairwise disjoint.
+Such a judgment asserts: $P$ is ensured to safely provide
+a usage of name $z$ according to the behavior %(session) 
+specified by type $C$, whenever composed with any process environment providing
+usages of names according to the behaviors specified by names in
+$\G;\D$.  As shown in~\cite{CairesP10}, in our
+case safety ensures that behavior is free of communication errors
+and deadlock.  
+A client $Q$ that relies on external
+services and does not provide any is typed as $\Gamma ; \Delta
+\vdash Q::-{:}\one$.  In general, a process $P$ such that $\Gamma ;
+\Delta \vdash P :: z{:}C$ represents a system providing behavior $C$ at
+channel $z$, building on ``services'' declared in $\Gamma;\Delta$.  
+%Of particular interest is a 
+A
+system typed as $\Gamma ; \Delta \vdash R ::
+z{:}\bang A$ represents a shared server. Interestingly, the
+asymmetry induced by the intuitionistic interpretation of $\bang A$
+enforces locality of shared names but not of linear (session names),
+which exactly corresponds to the intended model of sessions.
+
+
+The rules of our type system $\pi\DILL$ are given in
+Fig.~\ref{fig:type-system}.  
+We use $T, S$ for right-hand side
+singleton environments (e.g., $z{:}C$).  
+%The interpretation of the various rules should be clear, given the explanation of types given above.  
+Rule \name{T$\mathsf{id}$} defines identity in terms of the forwarding construct.
+Since in rule \name{T$\rgt\otimes$} the sent name is always
+fresh, our typed calculus conforms to an internal
+mobility discipline~\cite{DBLP:journals/tcs/Boreale98},
+without loss of expressiveness.
+The composition rules (T$\cut$/T$\cutbang$) follow the ``composition
+plus hiding'' principle~\cite{DBLP:journals/tcs/Abramsky93}, extended
+to a name passing setting.  
+Other linear typing rules for
+parallel composition (as in, e.g.,~\cite{DBLP:conf/popl/KobayashiPT96}) are derivable---see~\cite{CairesP10}.
+%
+As we  consider $\pi$-calculus terms up to structural
+congruence, typability is closed under $\equiv$ by
+definition. $\pi\DILL$ enjoys the usual properties of equivariance,
+weakening, and contraction in $\G$. The coverage property also
+holds: if $\Gamma;\Delta\vdash P :: z{:}A$ then $\fn P\subseteq
+\Gamma\cup \Delta \cup \{z\}$. In the presence of type-annotated
+restrictions $(\nu x{:}A)P$, as usual in typed $\pi$-calculi~\cite{sangiorgi-walker:book}, 
+type-checking is decidable.
+
+
+
+Session type constructors thus correspond directly to intuitionistic linear logic connectives. 
+By erasing processes, typing judgments in $\pi\DILL$ correspond to 
+$\DILL$, a sequent formulation of Barber's dual intuitionistic linear logic~\cite{BP:97,Pfenning2003TR}.
+Below we only provide some intuitions of this correspondence; 
+%between $\pi\DILL$ and the $\DILL$ sequent calculus; 
+see~\cite{CairesP10} for details.
+
+%Session types for the $\pi$-calculus  thus correspond directly to 
+%the sequent calculus for 
+%dual intuitionistic linear logic $\DILL$~\cite{BP:97,Pfenning2003TR}.
+%Below, we only provide some intuitions of  the correspondence 
+%between $\pi\DILL$ and the $\DILL$ sequent calculus; see \cite{CairesP10} for details.
+
+ \DILL\ is equipped with a faithful proof term assignment, so
+sequents have the form $ \G;\D \vdash D : C $, where $\G$ is the
+unrestricted context, $\D$ the linear context, $C$ a formula (= type),
+and $D$ the proof term that faithfully represents the derivation of
+$\G;\D \vdash C$.  Given the parallel structure of the two systems, if $\G;\D \vdash D{:}A$ is derivable in \DILL\ then there is a process $P$ and a name $z$
+such that $\G;\D \vdash P :: z{:}A$ is derivable in $\pi$\DILL. The
+converse also holds: if $\G;\D \vdash P :: z{:}A$ is derivable in
+$\pi$\DILL\ there is a derivation $D$ that proves $\G;\D \vdash D : A$.  
+This correspondence is made explicit by a translation from
+faithful proof terms to processes:
+given $\G; \D \vdash D : C$, we write $\hat D^z$ for the translation of $D$
+such that $\G; \D \vdash \hat D^z :: z {:} C$.
+More precisely, we have \emph{typed extraction}: we  write $ \G; \D \vdash D \ext P :: z{:}A$, meaning ``proof $D$
+  extracts to $P$'', whenever $\G; \D \vdash D : A$ and $\G; \D \vdash
+  P:: z{:}A$ and $P\equiv \hat D^z$.
+Typed extraction is unique up to structural congruence.
+As processes are related by structural and computational rules, namely
+those involved in the definition of $\equiv$ and $\to$, derivations in
+\DILL\ are related by structural and computational rules, that express
+certain sound proof transformations that arise in cut-elimination.
+Reductions generally take place when
+a right rule meets a left rule for the same connective, and correspond
+to reduction steps in the process term assignment. Similarly, 
+structural conversions in \DILL correspond to structural equivalences in the $\pi$-calculus, since they just
+change the order of cuts.
+
+
+We now recall some main results from~\cite{CairesP10}: \emph{subject reduction} and \emph{progress}. \\ % that will be useful for our developments. \\
+%These are results from \cite{CairesP10} and the associated technical report \cite{CairesP10ext}.
+For any $P$, define
+$live(P)$ iff $P \equiv (\nu \til{n})(\pi.Q \para R)$,
+for some sequence of names $\til{n}$, 
+a process $R$,  and a
+\emph{non-replicated} guarded process $\pi.Q$.
+%, R, \overline{n}$ where $\pi.Q$ is a 
+
+\begin{theorem}[Subject Reduction]\label{th:sr}
+If $\Gamma; \Delta \vdash P{::}z{:}A$ and $P{\red}Q$ then $\Gamma; \Delta \vdash Q{::}z{:}A$.
+\end{theorem}
+
+\begin{theorem}[Progress]\label{th:progress}
+If $\cdot; \cdot \vdash P{::}z{:}\one$ and $live(P)$ then exists a $Q$ such that $P \red Q$.
+\end{theorem}
+
+%\begin{lemma}[Action Shape Characterization Lemmas -- Excerpt]\label{lem:acshape}
+%%See TR for the full (long) statement for Lemma 9.1.
+%Let $\Gamma; \Delta \vdash D \leadsto P::x{:}C$ .
+%Then we have: (1) If $P \tr{}\alpha{} Q$ and $C = \mathbf{1}$ then $s(\alpha) \neq x$.
+%(2) If $P \tr{}\alpha{} Q$ and $y{:}\mathbf{1} \in \Delta$ then $s(\alpha) \neq y$.
+%(3) If $P \tr{}\alpha{} Q$ and $s(\alpha)=x $ and $C = A \otimes B$ then $\alpha = \overline{(\nu y)x \out y}$.
+%(4) If $P \tr{}\alpha{} Q$ and $s(\alpha)=y $ and $y{:}A \otimes B \in \Delta$ then $\alpha = y(z)$.
+%%\begin{enumerate}
+%%\item If $P \tr{}\alpha{} Q$ and $C = \mathbf{1}$ then $s(\alpha) \neq x$.
+%%\item If $P \tr{}\alpha{} Q$ and $y{:}\mathbf{1} \in \Delta$ then $s(\alpha) \neq y$.
+%%\item If $P \tr{}\alpha{} Q$ and $s(\alpha)=x $ and $C = A \otimes B$ then $\alpha = \overline{(\nu y)x \out y}$.
+%%\item If $P \tr{}\alpha{} Q$ and $s(\alpha)=y $ and $y{:}A \otimes B \in \Delta$ then $\alpha = y(z)$.
+%%\end{enumerate}
+%\end{lemma}
+%
+%\begin{lemma}[Preservation Lemma]\label{lem:preserv}
+%%See TR for the full (long) statement. We use only Lemma 9.4.
+%%\end{lemma}
+%%\begin{lemma}\label{lemma:cp-otimes}
+%  Assume (a) $\G ; \D_1 \vdash D \ext P :: x {:} A_1\otimes A_2$ with
+%  $P \stackrel{\ov{(\nu y)x\out y}}{\rightarrow} P'$; and (b) $\G ;
+%  \D_2, x{:} A_1\otimes A_2\vdash E \ext Q :: z{:} C$ with $Q
+%  \stackrel{x(y)}{\rightarrow} \! Q'$.
+%Then (1) $ \cut \; D\; (x.\, E) \equiv \Red \equiv F$ for
+%  some $F$; 
+%  (2) $\G ; \D_1,\D_2 \vdash F \ext R :: z : C$ for $R
+%  \equiv (\nu y)(\nu x)(P' \mid Q')$.
+%\end{lemma}
+%
+%\begin{lemma}\label{lem:typeshape}
+%Assume $\Gamma; \Delta \vdash D \leadsto P::z{:}C$  and not $live(P)$. Then
+%\begin{enumerate}
+%\item $C = \one$ or $C = !C'$, for some $C'$;
+%\item $(x_{i} :A_{i}) \in \Delta$ implies $A_{i} = \one$ or there is $B_{j}$ with $A_{i} = !B_{j}$;
+%\item $C = !C'$ implies $P \equiv (\nu \overline{x})(!z(y).R | R')$
+%\end{enumerate}
+%\end{lemma}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\newcommand{\maxlen}[1]{\ensuremath{\mathsf{mlen}(#1)}}
+
+\section{Linear Logical Relations and Termination of Typed Processes}\label{sec:term}
+%\input{terminate}
+%\input{terminate-long}
+
+A process $P$ \emph{terminates} (written $P \TER$) if there is no infinite reduction path from $P$.
+Here we introduce a theory of \emph{linear} logical relations for session types,  
+and use it to prove that well-typed processes  always terminate. 
+The proof %uses the method of logical relations, and 
+can be summarized into two steps:
+(i) Definition of a logical predicate on processes, by induction on the structure of types. 
+Processes in the predicate are terminating by definition.
+(ii) Proof that every well-typed process is in the logical predicate.
+%
+
+We begin by stating an extension to $\equiv$, which will be useful in our developments.
+%We begin stating  properties of structural congruence with respect to termination. 
+
+
+\begin{definition}\label{d:repp}
+We write $\repp$ 
+for the least congruence relation on processes which results from extending 
+structural congruence $\equiv$ (Def. \ref{def:struct-cong})
+with the following  axioms: 
+\begin{enumerate}
+\itemsep 1pt
+\item $(\nu u)(!u(z).P \para (\nu y)(Q \para R)) \repp(\nu y)((\nu u)(!u(z).P \para Q) \para (\nu u)(!u(z).P \para R))$
+%\item $\begin{array}{l}(\nu u)(!u(y).P \para (\nu v)(!v(z).Q \para R)) \\
+%\qquad  \qquad\repp (\nu v)((!v(z).(\nu u)(!u(y).P \para Q)) \para R)
+% \end{array}$
+\item $\begin{array}{l}(\nu u)(!u(y).P \para (\nu v)(!v(z).Q \para R)) \\
+\qquad ~~ \qquad \qquad \qquad \repp (\nu v)((!v(z).(\nu u)(!u(y).P \para Q)) \para (\nu u)(!u(y).P \para R))
+ \end{array}$
+\item $(\nu u)(!u(y).Q \para P) \repp P$ ~~~if $u \not\in \fn{P}$
+\end{enumerate}
+\end{definition}
+
+These  axioms
+are called the \emph{sharpened replication axioms}~\cite{sangiorgi-walker:book} and are known to express sound behavioral equivalences up to strong bisimilarity in our typed setting.
+Intuitively, (1) and (2) represent principles for the distribution of shared servers among processes, 
+while (3) formalizes the 
+garbage collection of shared servers which cannot be invoked by any process.
+Notice that $\repp$ was defined in~\cite{CairesP10} (Def 4.3), and noted $\simeq_{s}$. 
+
+%\begin{remark}
+%There is an additional sharpened replication axiom:
+%$$(\nu u)(!u(y).P \para (\nu v)(!v(z).Q \para R)) \repp (\nu v)((!v(z).(\nu u)(!u(y).P \para Q)) \para R)$$
+% which corresponds to the special case of (2), when $u \not\in\fn{R}$.
+%In fact, it is derivable from (2) and (3).
+% \end{remark}
+
+\begin{proposition}\label{p:repptra}Let $P$ and $Q$ be well-typed processes.
+\begin{enumerate}
+\item If $P \redd P'$ and $P \repp Q$ then there is $Q'$ such that $Q \redd Q'$ and $P' \repp Q'$.
+\item If $P \tra{\alpha} P'$ and $P \repp Q$ then there is $Q'$ such that $Q \tra{\alpha}Q'$ and $P' \repp Q'$.
+\end{enumerate}
+\end{proposition}
+%\begin{proof}
+%By induction on the derivation of $P \repp Q$, then by case analysis on 
+%$\redd$ and $\tra{\alpha}$, respectively.\qed
+%\end{proof}
+
+\begin{proposition}\label{p:scterm}
+If $P \TER$ and $P \repp Q$ then $Q \TER$.
+\end{proposition}
+
+%\begin{proof}
+%Follows by 
+%Prop \ref{p:repptra},  by noticing that: (i) axioms (1) and (2) of $\repp$ do not add new input-guarded replicated processes and
+%(ii) axiom (3) may add a new input-guarded replicated process (if read from right to left) but it cannot be invoked by the rest of the process. \qed
+%\end{proof}
+
+\newcommand{\wdtra}[1]{\ensuremath{\stackrel{#1~~}{\Longrightarrow_{D}}}}
+
+
+
+\noindent\emph{First Step: The Logical Predicate and its Closure Properties.~}\label{ss:logpred}
+We define a logical predicate on well-typed processes and establish a few associated closure properties. 
+More precisely, we define a sequent-indexed family of sets of processes (process predicates)
+so that a set of processes $\lr{ \Gamma;\Delta\vdash T}$
+enjoying certain closure properties is assigned to any sequent $\Gamma;\Delta\vdash T$.
+%\subsubsection{The Logical Predicate.}
+The logical predicate is defined by induction on the structure of sequents. 
+The base case, given below, considers sequents with empty left-hand side typing, 
+where we abbreviate $\lr{ \Gamma;\Delta\vdash T}$ by $\lr{T}$.
+We write $P \not\redd $ to mean that $P$ cannot reduce; it can perform visible actions, though.
+
+
+\begin{definition}[Logical Predicate - Base case]\label{d:lr}
+For any type $T=z{:}A$ we inductively define $\lr{T}$ as the set of all processes $P$
+such that $P\TER$ and $\cdot; \cdot \vdash P::T$ and 
+%\vspace{-2mm}
+\begin{align*}
+P \in \lr{z{:}\mathbf{1}} &\text{ if  }   ~\forall P' .(P \wtra{} P' \land P' \not\redd ) \Rightarrow P' \repp \zero\\
+P \in \lr{z{:}A\lolli B}&\text{ if   }~\forall P'y .(P \wtra{z(y)~~} P') \Rightarrow  \forall Q \in \lr{y{:}A}. (\nu y)(P' \para Q) \in \lr{z{:}B}\\
+P \in \lr{z{:}A\otimes B}&\textrm{ if  }~\forall P'y. (P \wtra{\overline{(\nu y) z\out y}~} P') \Rightarrow \\
+& 
+\quad~\exists P_1,P_2. (P' \repp P_{1} \para P_{2} \land P_{1} \in \lr{y{:}A} \land P_{2} \in \lr{z{:}B})\\
+%P \in \lr{z{:}!A}&\text{ if } \forall P'y. (P \wtra{z(y)} P') \Rightarrow \\ & & \quad \exists P_1, P_2.(P' \repp \, (!z(y).P_{1} \para P_{2}) \land P_1 \in \lr{y{:}A} \land P_{2} \in \lr{y{:}A})\\
+P \in \lr{z{:}!A}&\text{ if  } ~\forall P'. (P \wtra{} P') \Rightarrow  \exists P_1.(P' \repp \, !z(y).P_{1} \land P_1 \in \lr{y{:}A})\\
+P \in \lr{z{:}A\with B}&\text{ if  } ~(\forall P'. (P \wtra{z.\inl~} P')  \Rightarrow P' \in \lr{z{:}A}) \\
+&  \land  (\forall P'. (P \wtra{z.\inr~~} P')  \Rightarrow P' \in \lr{z{:}B})\\
+P \in \lr{z{:}A\oplus B}&\text{ if  }~(\forall P'. (P \wtra{\overline{z.\inl}~} P')  \Rightarrow P' \in \lr{z{:}A})\\
+&   \land (\forall P'. (P \wtra{\overline{z.\inr}~~} P')  \Rightarrow P' \in \lr{z{:}B})
+\end{align*}
+%We write $P \in \mathcal{L}$ if  $P \in \lr{T}$, for some $T$.
+\end{definition}
+
+Some comments  are in order. 
+First, observe how the definition of $\lr{T}$ relies on both reductions and labeled transitions, and 
+the fact that processes in the logical predicate are terminating  by definition.
+Also, notice that the use of $\repp$ in $\lr{z{:}\mathbf{1}}$ 
+is justified by the fact that a terminated process may be well the composition of a number of shared servers with no potential clients.
+Using suitable processes that ``close'' the derivative of the transition, in 
+$\lr{z{:}A \lolli B}$ and $\lr{z{:}A \otimes B}$  we adhere to the linear logic interpretations for input and output types, respectively.
+In particular, in $\lr{z{:}A \otimes B}$ it is worth observing how $\repp$ is used to ``split'' the derivative of the transition, 
+thus preserving consistency with the separate, non-interfering nature of the multiplicative conjunction. 
+The definition of $\lr{z{:}!A}$ is also rather structural, relying again on the distribution principles embodied in $\repp$.
+The definition of  $\lr{z{:}A \with B}$ and $\lr{z{:}A \oplus B}$ are self-explanatory.
+
+Below, we extend the logical predicate to arbitrary typing environments. 
+Observe how we adhere to the principles 
+of rules \name{T$\cut$} and \name{T$\cut!$} for this purpose.
+
+\begin{definition}[Logical Predicate - Inductive case]\label{d:elr}
+For any sequent $\Gamma;\Delta \vdash T$ with a non-empty left hand side environment,
+we define $\lr{\Gamma;\Delta \vdash T}$
+to be the set of processes inductively defined as follows:
+%
+\begin{align*}
+P\in \lr{\Gamma;y{:}A,\Delta \vdash T} &~\text{if }~\forall R \in \lr{y{:}A}. (\nu y)(R \para P) \in \lr{\Gamma;\Delta \vdash T}\\
+P\in \lr{u{:}A,\Gamma;\Delta \vdash T} & ~\text{if }~\forall R \in \lr{y{:}A}. (\nu u)(!u(y).R \para P) \in \lr{\Gamma;\Delta \vdash T}
+\end{align*}
+ \end{definition}
+
+
+
+
+
+We often rely on the following alternative characterization of the sets
+$\lr{\Gamma;\Delta \vdash T}$.
+
+
+\begin{definition}\label{d:elraux}
+Let 
+$\Gamma = u_{1}{:}B_{1},\ldots,u_{k}{:}B_{k},$ 
+and 
+$\Delta = x_{1}{:}A_{1},\ldots,x_{n}{:}A_{n}$
+be 
+a non-linear and a linear 
+typing environment, resp. 
+Letting $I =\! \{1,\ldots,k\}$ and $J =\! \{1,\ldots,n\}$, 
+we define the sets of processes \closet{u}{\Gamma} and \closet{x}{\Delta} as:
+$$
+\closet{u}{\Gamma}  \stackrel{\textrm{def}}{=} \big\{ \prod_{i \in I}\, !u_{i}(y_{i}).R_{i} ~~|~ R_{i} \in \lr{y_{i}{:}B_{i}} \big\} 
+\qquad \closet{x}{\Delta}  \stackrel{\textrm{def}}{=} \big\{\prod_{j \in J} Q_{j} ~~|~ Q_{j} \in \lr{x_{j}{:}A_{j}}\big\}
+$$
+\end{definition}
+
+Because of the r\^{o}le of left-hand side typing environments, 
+processes in $\closet{}{\Gamma}$ and $\closet{}{\Delta}$ are then 
+logical representatives of the behavior specified by $\Gamma$ and $\Delta$, respectively.
+
+\begin{proposition}\label{p:closet}
+Let 
+$\Gamma$ and   % = u_{1}{:}G_{1},\ldots,u_{n}{:}G_{n}$ 
+$\Delta$ % = x_{1}{:}A_{1},\ldots,x_{m}{:}A_{m}$
+be 
+a non-linear and a linear 
+typing environment, resp. 
+Then, for all $Q \in \closet{u}{\Gamma}$ and for all $R \in \closet{x}{\Delta}$, we have
+$Q \TER$ and $R \TER$. Moreover, $Q \not \redd$.
+\end{proposition}
+%\begin{proof}
+%By definition, every process in 
+% \closet{x}{\Delta} corresponds to the composition of non-interfering terminating processes.
+% The same applies for processes in  \closet{u}{\Gamma}, which, by construction, correspond to 
+%the composition of input-guarded replicated processes.
+%\qed
+%\end{proof}
+
+The proof of the following lemma is immediate from Definitions \ref{d:elr} and \ref{d:elraux}.
+\begin{lemma}\label{l:elr}
+Let 
+$\Gamma;\Delta \vdash P{::}T$, with
+$\Gamma{=} u_{1}{:}B_{1},\ldots,u_{k}{:}B_{k}$ and
+$\Delta{=} x_{1}{:}A_{1},\ldots,x_{n}{:}A_{n}$.
+We have:
+$
+P \in \lr{\Gamma;\Delta \vdash T}~\textrm{  iff  }~ \forall Q \in \closet{u}{\Gamma},\forall R \in \closet{x}{\Delta}, (\nu \til{u},\til{x})(P \para Q \para R) \in \lr{T}.
+$
+\end{lemma}
+%\begin{proof}
+%Immediate from Defs \ref{d:elr} and \ref{d:elraux}.\qed
+%\end{proof}
+ 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\subsubsection{Closure Properties.}
+The following closure properties 
+will be of the essence in the second step of the proof, when we will show that well-typed processes are in the logical predicate.
+%Our objective is to show that  well-typed processes terminate; the proof relies on a number of closure properties, which are given next.
+We first state  closure of \lr{T} with respect to 
+substitution and structural congruence:
+
+%\begin{proposition}\label{p:lrstc}Let $P$ and $Q$ be well-typed processes.
+%\begin{enumerate}
+%\item If $P \redd P'$ and $P \equiv Q$ then there is $Q'$ such that $Q \redd Q'$ and $P' \equiv Q'$.
+%\item If $P \tra{\alpha} P'$ and $P \equiv Q$ then there is $Q'$ such that $Q \tra{\alpha}Q'$ and $P' \equiv Q'$.
+%\end{enumerate}
+%\end{proposition}
+%\begin{proof}
+%By induction on the derivation of $P \equiv Q$, then by case analysis on 
+%$\redd$ and $\tra{\alpha}$, respectively.\qed
+%\end{proof}
+
+\begin{proposition}\label{p:subst}
+Let $A$ be a type. If $P \in \lr{z{:}A}$ then $P\subst{x}{z} \in \lr{x{:}A}$.
+\end{proposition}
+
+\begin{proposition}\label{p:strcong}
+Let $P, Q$ be well-typed. If $P \in \lr{T}$ and $P \equiv Q$ then $Q \in \lr{T}$.
+\end{proposition}
+%\begin{proof}
+%Using Props \ref{p:repptra} and \ref{p:scterm}, and the fact that typed processes are closed under $\equiv$ by definition.\qed
+%\end{proof}
+
+%\item $(\nu u)(!u(y).P \para (\nu y)(Q \para R)) = (\nu y)((\nu u)(!u(y).P \para Q) \para (\nu u)(!u(y).P \para R))$
+%\item $(\nu u)(!u(y).P \para (\nu v)(!v(y).Q \para R)) = (\nu v)((!v(y).(\nu u)(!u(y).P \para Q)) \para (\nu u)(!u(y).P \para R))$
+%\item $(\nu u)(!u(y).Q \para P) = P$ if $u \not\in \fn{P}$
+
+The next proposition provides a basic liveness guarantee for certain typed processes. %, based on their type.
+
+
+\begin{proposition}\label{p:live}
+Let $P \in \lr{z{:}T}$ with $T \in \{A \otimes B, A \lolli B, A \oplus B, A \with B\}$.
+Then, there exist $\alpha, P'$ such that 
+(i) $P \wtra{\alpha} P'$, and 
+(ii) 
+if $T{=}A \otimes B$ then
+$\alpha = \overline{(\nu y)z\out y}$;  
+if $T{=}A \lolli B$ then $\alpha = z(y)$; 
+if $T{=}A \oplus B$ then 
+$\alpha = \overline{z.\inr}$ or 
+$\alpha = \overline{z.\inl}$; 
+if $T{=}A \with B$ then 
+$\alpha = z.\inr$ or $\alpha = z.\inl$.
+\end{proposition}
+
+%\begin{proof}
+%By Def \ref{d:lr}, we have that $\cdot ; \cdot \vdash P::z{:}T$ and $P \TER$.
+%Since $T\not\in\{\one, !T'\}$ then, using Lemma \ref{lem:typeshape}, we know that $live(P)$ holds.
+%Hence, the Progress Lemma can be used to infer that either $P \redd P'$ 
+%or  $P \tra{\alpha} P'$,  with $s(\alpha)= z$. 
+%Termination ensures that such reductions, before or after $\alpha$, are finite. 
+%This gives us Part (i). Part (ii) on the actual shape of $\alpha$ can be inferred using Lemma \ref{lem:acshape}.\qed
+%\end{proof}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+We now extend Proposition \ref{p:strcong} so as to state closure of \lr{T} under $\repp$. 
+%Then, using the characterization given by Lemma \ref{l:elr}, we will generalize this closure result to sets \lr{\Gamma;\Delta\vdash T}.
+
+%\newpage
+
+\begin{proposition}\label{p:repp}
+Let $P, Q$ be well-typed. If $P \in \lr{T}$ and $P \repp Q$ then $Q \in \lr{T}$.
+\end{proposition}
+
+\longg{
+\begin{proof}
+By induction the definition of $P \repp Q$. % (Def. \ref{d:repp}).
+Appendix \ref{ap:repp},  Page \pageref{ap:repp}. \qed
+\end{proof}
+}{}
+
+
+%We now extend the above result  to show that sets \lr{\Gamma;\Delta\vdash T} are closed under $\repp$:
+%
+%\begin{proposition}
+%If $P \in \lr{\Gamma;\Delta\vdash T}$ and $P \repp Q$ then $Q \in \lr{\Gamma;\Delta\vdash T}$.
+%\end{proposition}
+%\begin{proof}
+%By the characterization of the sets 
+%\lr{\Gamma;\Delta\vdash T} given by 
+%Lemma \ref{l:elr}, we know that 
+%$P \in \lr{\Gamma;\Delta\vdash T}$ iff  
+%$(\nu \til{u},\til{x})(P \para R \para S) \in \lr{T}$, for every $R \in \closet{}{\Gamma}$ and $S \in \closet{}{\Delta}$.
+%Hence, we show that
+% $Q \in \lr{\Gamma;\Delta\vdash T}$
+%by showing that 
+% $(\nu \til{u},\til{x})(Q \para R \para S) \in \lr{T}$, for every $R \in \closet{}{\Gamma}$ and $S \in \closet{}{\Delta}$.
+% Now, since $P \repp Q$ and $\repp$ is a congruence, we immediately have  
+% $(\nu \til{u},\til{x})(P \para R \para S) \repp  (\nu \til{u},\til{x})(Q \para R \para S)$,
+% for every $R \in \closet{}{\Gamma}$ and $S \in \closet{}{\Delta}$.
+%Using this, together with Prop \ref{p:repp}, we infer $Q \in \lr{\Gamma;\Delta\vdash T}$, as desired.
+% \qed
+%\end{proof}
+
+We now state 
+%properties for 
+ \emph{forward} and \emph{backward} closure of the logical predicate with respect to reduction;
+these are typical  ingredients in the method of logical relations.
+
+\begin{proposition}[Forward Closure]\label{p:fwc}
+If $P \in \lr{T}$ and $P \redd P'$ then $P' \in \lr{T}$.
+\end{proposition}
+
+%\begin{proof}
+%By induction on the structure of type $T$. In all cases, we must show that: 
+%(i) $P'$ terminates; (ii) $P'$ is well-typed; and (iii) $P'$ is in \lr{T}, as in Def. \ref{d:lr}.
+%First, we have that since $P \TER$ and $P \redd P'$, then $P' \TER$ as well.
+%Well-typedness follows from subject reduction (Theorem \ref{th:sr}). 
+%Finally, membership in \lr{T} follows by definition of weak transition.
+%\qed
+%\end{proof}
+
+
+
+\begin{proposition}[Backward Closure]\label{p:det}
+If for all $P_{i}$ such that $P \redd P_{i}$ we have $P_{i} \in \lr{T}$ then $P \in \lr{T}$.
+\end{proposition}
+
+%\begin{proof}
+%By induction on the structure of type $T$. In all cases, we must show that: 
+%(i) $P$ terminates; (ii) $P$ is well-typed; and (iii) $P$ is in \lr{T}, as in Def. \ref{d:lr}.
+%The first two are immediate from the definition of 
+%terminating processes
+%(part of Def. \ref{d:lr}) 
+%and subject reduction (Theorem \ref{th:sr}), respectively. The third item follows by definition 
+%of weak transition, noticing that if 
+%$P' \wtra{~\alpha~} P''$ and $P \redd P'$ then clearly $P \wtra{~\alpha~} P''$.
+%\qed
+%\end{proof}
+
+The final closure property concerns parallel composition of processes:
+
+\begin{proposition}[Weakening]\label{p:parc}
+Let $P,Q$ be processes such that $P \in \lr{T}$ and $Q \in \lr{-{:}\one}$.
+Then, $P \para Q \in \lr{T}$.
+\end{proposition}
+
+
+\longg{\begin{proof}
+By induction on the structure of type $T$. 
+See Appendix \ref{ap:parc}, Page  \pageref{ap:parc}.\qed 
+\end{proof}}{}
+
+
+
+
+%Finally, we have the following property:
+%\begin{proposition}\label{p:lrsubst}
+%If $P \in \lr{y{:}A}$  then $P\subst{z}{y} \in \lr{z{:}A}$.
+%\end{proposition}
+%\begin{proof}
+%Immediate from the definition of typed processes, and from Def \ref{d:lr}. \qed
+%\end{proof}
+
+%\begin{proposition}\label{p:copy}
+%Let $\Gamma, z{:}A; \Delta \vdash P::T$. 
+%Then there exists a $P'$ such that: $P \tra{\alpha} P'$ and $\alpha = (\nu y)z\out y$, for some $y{:}A \in \Delta$.
+%\end{proposition}
+%
+%\begin{proof}
+%TO DO\qed
+%\end{proof}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\newproofcase}[1]{\begin{align}#1\end{align}}
+\newcommand{\newfacttext}[1]{&  \mbox{#1 } & \nonumber}
+
+\newcommand{\proofcase}[1]{\begin{align*}#1\end{align*}}
+\newcommand{\maybreak}{\displaybreak[2]}
+
+%\newcommand{\proofcase}[1]{$$\begin{array}{lll}#1\end{array}$$}
+
+%\newcommand{\proofsubcase}[1]{\nonumber & & {#1}}
+%
+%\newcommand{\nline}{\\}%\nonumber
+%\newcommand{\nlinenn}{\nonumber \\}
+
+\newcommand{\longfact}[2]{& #1 \, \rlap{$#2$}&  }
+\newcommand{\longerfact}[3]{& #1 \, \rlap{$#2$}&  \mbox{\quad\qquad\qquad[#3]~}}
+
+
+\newcommand{\fact}[2]{& #1\hspace{0.3cm}& \mbox{[#2]~} }
+\newcommand{\facttext}[1]{&  \mbox{#1 } & }
+
+
+
+%\newpage
+\noindent\emph{Second Step: Well-typed Processes are in the Logical Predicate.~}\label{ss:wtlog}
+We now prove that well-typed processes are in the logical predicate. % (Lemma \ref{l:soundlr}).
+Because of the definition of the predicate, 
+termination of well-typed processes 
+will follow as a consequence. % of this lemma.
+%then follows as an immediate consequence of this fact (Theorem \ref{c:term}).
+
+
+%In the proof, 
+%we use $G,G',\ldots$ and $D, D',\ldots$ to range over processes in $\closet{}{\Gamma}$ and $\closet{}{\Delta}$, respectively.
+%Also, by a slight abuse of notation we write \lr{x{:}A} 
+%and
+%$!z(y).\lr{y{:}A}$
+%to denote a  \emph{process included in} \lr{x{:}A}
+%and 
+%$\lr{!z{:}A}$, respectively.
+
+\begin{lemma}\label{l:soundlr}
+Let $P$ be a process.
+If $\Gamma; \Delta \vdash P :: T$ then $P \in \lr{\Gamma;\Delta\vdash T}$.
+\end{lemma}
+
+\begin{proof}%[Sketch] 
+By induction on the derivation of $\Gamma; \Delta \vdash P :: T$,
+with a case analysis on the last typing rule used. 
+We have 18 cases to check;
+in all cases, we use Lemma~\ref{l:elr} to show that
+every $M = (\nu \til{u}, \til{x})(P \para G \para D)$ with $G \in \closet{}{\Gamma}$ and $D \in \closet{}{\Delta}$, is in \lr{T}.
+In case \name{T$\mathsf{id}$}, we  use Proposition~\ref{p:subst} (closure wrt substitution) and Proposition \ref{p:det} (backward closure).
+In cases 
+\name{T$\lft\otimes$},
+\name{T$\lft\lolli$},
+\name{T$\cpy$},
+\name{T$\lft\oplus$},
+\name{T$\lft\with_{1}$},
+and
+\name{T$\lft\with_{2}$},
+%the proof proceeds 
+we proceed
+in two steps: first, using  Proposition~\ref{p:fwc} (forward closure)
+we show that every $M''$  such that $M \wtra{} M''$ is in \lr{T}; then, we use this result in combination with
+Proposition~\ref{p:det} (backward closure) to conclude that $M \in \lr{T}$.
+In cases
+ \name{T$\rgt\one$},
+\name{T$\rgt\otimes$},
+\name{T$\rgt\lolli$},
+\name{T$\rgt\bang$},
+\name{T$\rgt\oplus_{1}$},
+and
+\name{T$\rgt\oplus_{2}$},
+%the proof consists in showing 
+we show
+that $M$ conforms to a specific case of Definition~\ref{d:lr}.
+Case \name{T$\lft\one$} uses Proposition~\ref{p:parc} (weakening).
+Cases \name{T$\lft\otimes$}, \name{T$\lft\lolli$},  \name{T$\lft\oplus$},
+and \name{T$\lft\with_{1}$} use the liveness guarantee given by  Proposition~\ref{p:live}.
+Cases \name{T$\cpy$}, \name{T$\lft\bang$}, and \name{T$\cutbang$} use Proposition~\ref{p:strcong} (closure under $\equiv$).
+Cases \name{T$\cut$}, \name{T$\rgt\lolli$}, and \name{T$\rgt\bang$} use Proposition~\ref{p:repp} (closure under $\repp$).
+\longg{See Appendix \ref{ap:soundlr}, Page~\pageref{ap:term}. }{See~\cite{onlineapp} for details.
+}
+\qed
+\end{proof}
+
+We now state 
+the main result of this section: well-typed processes terminate.
+
+\begin{theorem}[Termination]\label{c:term}
+If $\Gamma; \Delta \vdash P :: T$ then $P \TER$. 
+\end{theorem}
+\begin{proof}
+Follows from previously proven facts. 
+By assumption, we have $\Gamma; \Delta \vdash P :: T$. Using this and Lemma \ref{l:soundlr} we obtain $P \in \lr{\Gamma; \Delta   \vdash T }$.
+Pick any $G \in \closet{}{\Gamma}, D \in \closet{}{\Delta}$: combining $P \in \lr{\Gamma; \Delta   \vdash T }$ and Lemma \ref{l:elr}
+gives us $(\nu \til{u},\til{x})(P \para G \para D) \in \lr{T}$. By using this, together with Definition \ref{d:lr}, we infer
+$(\nu \til{u},\til{x})(P \para G \para D)  \TER$. 
+Since Proposition \ref{p:closet} ensures that $G \TER$ and $D \TER$, this  latter result 
+allows us to conclude $P \TER$.
+%\newproofcase{
+%\tag{a}\fact{\Gamma; \Delta \vdash P :: T}{Assumption}\\
+%\tag{b}\fact{P \in \lr{\Gamma; \Delta   \vdash T   }}{By Lemma \ref{l:soundlr} and (a)}\\
+%\notag & \mbox{Pick any $G \in \closet{}{\Gamma}$, $D \in \closet{}{\Delta}$:}   & \maybreak \\
+%\tag{c}\fact{G \TER, D \TER}{By Prop \ref{p:closet}} \\
+%\tag{d}\fact{(\nu \til{u},\til{x})(P \para G \para D) \in \lr{T} }{By Lemma \ref{l:elr} on (b)}\\
+%\tag{e}\fact{(\nu \til{u},\til{x})(P \para G \para D)  \TER }{From (d) and Def \ref{d:lr}} \maybreak \\
+%\notag\fact{P \TER}{Consequence of (c) and (e)}
+%}
+\qed
+\end{proof}
+%Lemma \ref{l:soundlr}
+%ensures that $P \in \lr{\Gamma; \Delta \vdash T}$.
+%By Lemma \ref{l:elr}, this is equivalent to state that 
+%$(\nu \til{u},\til{x})(P \para G \para D) \in \lr{T}$, for every $G \in \closet{}{\Gamma}$ and $D \in \closet{}{\Delta}$.
+%By Def \ref{d:lr}, processes in \lr{T} terminate.
+%Hence, $P$ terminates. 
+%\qed 
+%\end{proof}
+
+
+
+
+
+
+\section{An Observational Equivalence for Typed Processes}\label{sec:typeq}
+Here we introduce
+\emph{typed context bisimilarity}, an observational equivalence over typed processes. %, and establish its basic properties.
+It is defined contextually, as a binary relation indexed over sequents.
+Rough\-ly, 
+%given a pair of (typed) processes, 
+typed context bisimilarity 
+equates two processes if, 
+%uses   the information contained in the their left- and right-hand side typings to guide the comparison: the two processes are deemed as equal if, 
+once coupled with all of their requirements 
+(as described by the left-hand side typing), they perform the same actions (as described by the right-hand side typing).
+To formalize this intuition, we 
+rely on a combination of inductive and coinductive arguments.
+The base case of the definition covers the cases in which the left-hand side typing environment is empty 
+(i.e., the process requires nothing from its context to execute): 
+the bisimulation game 
+is then defined 
+by induction on the structure of the (right-hand side) typing, following the expected behavior in each case.
+The inductive case covers the cases in which the left-hand side typing environment is not empty: 
+the tested processes are put in parallel with processes implementing the behaviors 
+described
+in the left-hand side typing.
+
+%\paragraph{Definition.~}
+%We use $T$ to range over right-hand side singleton environments.
+Below, we use $\seq$ to range over sequents of the form $\Gamma;\Delta \vdash T$.
+In the following, we write $\vdash T$ to stand for $\cdot \, ; \cdot \vdash T$.
+The definition of typed context bisimilarity relies on \emph{type-respecting} relations,
+which are indexed by sequents $\seq$. 
+
+%As we would like to equate processes in the same context (i.e., placed in the same left-hand side typing environments)
+%and offering the same behavior (i.e., exposing the same right-hand side typing), 
+
+%
+%\begin{definition}[Type-respecting Relations]
+%A \emph{type-respecting binary relation} between processes is a set $\mathcal{R}$
+%of 5-tuples $(\Gamma, \Delta, P, Q, T)$, each consisting of an unrestricted typing context, a linear typing context, two processes, and a type satisfying
+%both $\Gamma ; \Delta \vdash P::T$ and  $\Gamma ; \Delta \vdash Q::T$.
+%We write $\Gamma ; \Delta \vdash P  \, \rel \,   Q ::T$ if $(\Gamma, \Delta, P, Q, T) \in \rel$.
+%
+%A type-respecting binary relation \rel is said to be \emph{reflexive} if $\Gamma ; \Delta \vdash P::T$ implies 
+% $\Gamma ; \Delta \vdash P  \, \rel \,   P ::T$. We say \rel is \emph{symmetric} if 
+% $\Gamma ; \Delta \vdash P  \, \rel \,   Q::T$ implies
+% $\Gamma ; \Delta \vdash Q  \, \rel \,   P ::T$. Furthermore, 
+% \rel is \emph{transitive} if, given $\Gamma ; \Delta \vdash P  \, \rel \,   P' ::T$ and $\Gamma ; \Delta \vdash P'  \, \rel \,   Q ::T$
+% then also $\Gamma ; \Delta \vdash P  \, \rel \,  Q ::T$.
+%\end{definition}
+
+%\newcommand{\relind}[4]{\ensuremath{#3 \, \rel_{\, #1 \vdash #2}\, #4}}
+
+
+
+
+\begin{definition}[Type-respecting relations]
+A \emph{type-respecting binary relation} over proc\-ess\-es, 
+written $\{\rel_{\seq}\}_{\seq}$, 
+is defined as a family of relations over processes indexed by $\seq$.
+We often write $\rel$ to refer to the whole family. 
+We  write $\relind{\Gamma;\Delta}{T}{P}{Q}$ 
+to mean that 
+(i) $\Gamma; \Delta \vdash P::T$ and $\Gamma; \Delta \vdash Q::T$, and
+(ii)   $(P,Q) \in \rel_{\,\Gamma;\Delta\vdash T}$. 
+%We write $P \relind{\Gamma;\Delta}{T}   Q$ if $(P,Q) \in \rel_{\,\Gamma;\Delta\vdash T}$.
+%(Alternative notation: we write $\relindalt{\Gamma;\Delta}{T}{P}{Q}$ if $(P,Q) \in \rel_{\,\Gamma;\Delta\vdash T}$).
+
+\end{definition}
+
+%As anticipated, typed context bisimilarity is defined inductively on the left-hand side typing environments.
+%The base case 
+%deals with an empty context, and so the
+%definition considers the behavior described by the right-hand side typing, while the inductive case 
+%provides suitable closures---roughly, parallel processes implementing the context.
+
+\begin{definition}[Typed Context Bisimilarity]\label{d:typbis}
+A  symmetric type-respecting binary relation over processes $\mathcal{R}$
+ is a \emph{typed context bisimulation}
+if
+%, for all processes $P$, $Q$ %and name $x$, 
+%the following hold:
+%it holds that $\Gamma; \Delta \vdash P \, \rel \,  Q :: x : U$ implies:
+%\begin{enumerate}
+
+\noindent\underline{Base Cases}
+\vspace{-2mm}
+\begin{description}
+\item[Tau]  
+\relind{}{T}{P}{Q}
+implies that 
+for all $P'$ such that $P \tra{\, \tau \, } P'$, 
+there exists a $Q'$ such that
+ $Q \wtra{} Q'$ and 
+$\relind{}{T}{P'}{Q'}$ 
+
+
+% Input move, expects output from the context
+\item[Input ] 
+$\relind{}{x{:}A \lolli B}{P}{Q}$ 
+implies that
+for all $P'$ such that $P \tra{x(y)} P'$, %it holds that
+there exists a $Q'$ such that 
+$Q \wtra{x(y)}Q'$
+and  
+for all $R$ such that $\vdash R::y{:}A$, \\
+$\relind{}{x{:}B}{(\nu y)(P' \para R) }{(\nu y)(Q' \para R)}$.
+
+
+% Output move, expects output from the context
+\item[Output ] 
+
+$\relind{}{x{:}A \tensor B}{P}{Q}$ 
+implies that
+for all $P'$ such that $P \tra{\overline{(\nu y)x\langle y \rangle}} P'$,
+there exists a $Q'$ such that 
+$Q \wtra{~\overline{(\nu y)x\langle y \rangle}~}Q'$
+and 
+for all $R$ such that $\cdot; y{:}A \vdash R:: -{:}\one$, \\
+$\relind{}{x{:}B}{(\nu y)(P' \para R) }{(\nu y)(Q' \para R)}$.
+
+
+% Replicated Input move, expects output from the context
+\item[Replication ] 
+\relind{}{x{:}!A }{P}{Q}
+implies that
+for all $P'$ such that $P \tra{x(z)} P'$, 
+there exists a $Q'$ such that 
+ $Q \wtra{x(z)} Q'$
+and,   
+for all $R$ such that $\cdot; y{:}A \vdash R:: -{:}\one$, \\
+\relind{}{x{:}!A}{(\nu z)(P' \para R) }{(\nu z)(Q' \para R) }.
+
+
+
+% Choice, expects selection from the context
+\item[Choice] 
+\relind{}{x{:}A \with B}{P}{Q}
+implies \underline{both}:
+\begin{itemize}
+\item If $P \tra{x.\inl\,} P'$ then 
+\relind{}{x{:}A}{P'}{Q'}, 
+for some $Q'$ such that 
+$Q \wtra{~x.\inl~}Q'$; \underline{and}
+\item
+If $P \tra{x.\inr\,} P'$ then
+\relind{}{x{:}B}{P'}{Q'}, 
+ for some 
+$Q'$ such that
+ $Q \wtra{~x.\inr~}Q'$.
+\end{itemize}
+
+% Selection, expects choice from the context
+\item[Selection]  
+\relind{}{x{:}A \oplus B}{P}{Q} 
+implies \underline{both}:
+\begin{itemize}
+\item If $P \tra{\overline{x.\mathsf{inl}}\,} P'$ 
+then
+\relind{}{x{:}A}{P'}{Q'}
+ for some 
+$Q'$ such that
+ $Q \stackrel{~\overline{x.\mathsf{inl}}~}{\Longrightarrow }Q'$;  \underline{and}
+\item
+If $P \tra{\overline{x.\mathsf{inr}}\,} P'$ then
+\relind{}{x{:}B}{P'}{Q'}
+ for some 
+$Q'$ such that
+ $Q \stackrel{~\overline{x.\mathsf{inr}}~}{\Longrightarrow }Q'$.
+\end{itemize}
+\end{description}
+\vspace{-2mm}
+\noindent \underline{Inductive Cases}
+\vspace{-2mm}
+\begin{description}
+\item[Linear Names] 
+%$\Gamma; \Delta, y{:}A \vdash P \, \rel\,  Q::T$  
+$\relind{\Gamma; \Delta, y{:}A}{T}{P}{Q}$
+implies that  \\
+for all $R$ such that $ \vdash R::y{:}A$, then 
+%$\Gamma; \Delta \vdash (\nu y)(P \parallel R) \, \rel \, (\nu y)(Q \parallel R)::T$.
+$ \relind{\Gamma; \Delta}{T}{(\nu y)(P \para R)}{ (\nu y)(Q \para R)}$.
+
+% Non Linear names
+\item[Shared Names] 
+%$\Gamma,u{:}A ; \Delta \vdash P \, \rel\,  Q::T$  
+$\relind{\Gamma, u{:}A; \Delta}{T}{P}{Q}$
+implies that 
+%for all $R$ such that  $\cdot \, ; \cdot \vdash R :: u{:}!A$  \\
+%$\Gamma; \Delta \vdash (\nu u)(P \parallel R) \, \rel \, (\nu u)(Q \parallel R):: x:U $ holds \\ \\
+%(or, alternatively---see rule T!R---: 
+for all $R$ such that $ \vdash R::z{:}A$, then 
+% $\Gamma; \Delta \vdash (\nu u)(!u(z).R \parallel P) \rel (\nu u)(!u(z).R \parallel Q)::T$.
+ $ \relind{\Gamma; \Delta}{T}{(\nu u)(!u(z).R \para P)}{  (\nu u)(!u(z).R \para Q)}$.
+\end{description}
+We write \tybis for the union of all  typed context bisimulations, 
+and call it \emph{typed context bisimilarity}.
+\end{definition}
+
+%It is worth commenting on the contextual character of Definition \ref{d:typbis}.
+%Observe how i
+In all cases, a strong action is matched with a weak transition. 
+In proofs, we shall exploit the fact that by virtue of Theorem \ref{c:term}
+such a weak transition is always finite.
+In the base case, the 
+clauses for input, output, and replication decree the closure of 
+the tested processes with a process $R$ that ``complements'' the continuation of the tested behavior; 
+observe the very similar treatment for output and replication (where $R$ \emph{depends} on some behavior), and contrast it with that for input (where $R$ \emph{provides} the behavior). 
+Also,  
+notice how all clauses but that for replication are defined coinductively for the tested processes 
+(in the sense that closed evolutions should be in the relation), 
+but inductively on the type indexing the relation---the clause for replication may be thus considered as the only fully coinductive one. 
+Also worth noticing is how the closures defined in such clauses (and those defined by the clauses in the 
+inductive case) follow closely the spirit of \name{T$\cut$/T$\cutbang$} rules in the type system.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+\newcommand{\wit}[2]{\ensuremath{\mathcal{K}_{#2}}}
+\newcommand{\rela}[1]{\ensuremath{\mathcal{#1}}}
+\newcommand{\cntx}[1]{K[#1]}
+\newcommand{\idrel}[1]{\ensuremath{\mathcal{I}_{#1}}}
+\newcommand{\contrel}[1]{\ensuremath{\mathcal{W}_{\, \vdash #1}}}
+
+
+
+%\paragraph{Properties of Typed Context Bisimilarity.~}
+
+Definition \ref{d:typbis} immediately suggests a proof technique for 
+%showing that two processes are 
+typed context bisimilarity. 
+First, close the processes with representatives of their context, applying repeatedly the inductive case until the left-hand side typing 
+is empty. 
+Then, following the usual co-inductive proof technique,  
+show a type-respecting relation containing 
+%play the bisimilarity game defined by the base case with 
+the processes obtained in the first step.
+The following results are useful to realize these intuitions.
+
+We use $K, K'$ to range over \emph{(process) contexts}, i.e., processes with a hole $[\cdot]$.
+In particular, we use parallel contexts: contexts in which the hole can only occur in parallel.
+
+\begin{definition}\label{d:typclos}
+%Let \rela{R} be a type-respecting binary relation over processes.
+Let $\Gamma$ and $\Delta$ be non-empty typing environments.
+The set of parallel contexts \wit{R}{\Gamma;\Delta} is defined 
+by induction on the typing environments as follows:
+\begin{align*}
+K \in \wit{\rela{R}}{\emptyset ; \emptyset }  &\,\text{if}~K = [\cdot] \\
+K \in \wit{\rela{R}}{\Gamma,u{:}B;\, \Delta} &\,\text{if}~K\equiv(\nu u)(K' \para !u(y).R) \quad\text{for some}~K' \in  \wit{W}{\Gamma; \Delta}~\text{and}~\vdash R::y{:}B \\
+K \in \wit{\rela{R}}{\Gamma;\, \Delta,x{:}A} &\,\text{if}~K\equiv(\nu x)(K' \para S ) \quad \text{for some}~K' \in  \wit{W}{\Gamma;\Delta}~\text{and}~\vdash S::x{:}A
+\end{align*}
+\end{definition}
+
+\begin{proposition}\label{p:ctc}
+Let 
+$\Gamma = u_{1}{:}B_{1}, \ldots, u_{k}{:}B_{k}$ and
+$\Delta = x_{1}{:}A_{1}, \ldots, x_{n}{:}A_{n}$
+be typing environments.
+Letting $I = \{1,\ldots,k\}$ and $J = \{1,\ldots,n\}$, 
+we say that $K \in \wit{}{\Gamma; \Delta}$ if
+$$
+K \equiv (\nu \til{u},\til{x})([\cdot] \para \prod_{i \in I} !u_{i}(y_{i}).R_{i} \para \prod_{j \in J} S_{j})\quad\text{with}~ \vdash R_{i}::y_{i}{:}B_{i}~\text{and}~\vdash S_{j}::x_{j}{:}A_{j}
+$$
+\end{proposition}
+%\begin{proof}
+%Immediate from Def \ref{d:typclos}.
+%\qed
+%\end{proof}
+
+The following proposition allows us to move from an (inductive) proof under 
+non-empty typing environments $\Gamma, \Delta$ 
+to a (coinductive) proof under empty environments, 
+with pairs of processes within parallel contexts in $\wit{}{\Gamma;\Delta}$. 
+%It relies on the repeated  application of the inductive cases in the definition of $\approx$.
+%Below, we use $\#(\Gamma)$ to denote the cardinality of $\Gamma$.
+
+\begin{proposition}\label{p:typclos}
+%Let $P, Q$ be processes. 
+$\trelind{\Gamma; \Delta}{T}{P}{Q}$ implies 
+$\trelind{}{T}{\cntx{P}}{\cntx{Q}}$, for every parallel context $K \in \wit{\rela{R}}{\Gamma; \Delta}$.
+\end{proposition}
+
+\longg{
+\begin{proof}
+By induction on the size of $\Gamma$ and $\Delta$; 
+see Appendix \ref{ap:typclos} in Page \pageref{ap:typclos}. \qed
+\end{proof}}{%see \cite{onlineapp}.
+}
+
+
+
+
+\begin{definition}
+A type-respecting relation \rel is an \emph{equivalence} if it enjoys the following three properties:
+\begin{itemize}
+\item 
+
+\emph{Reflexivity:} $\Gamma; \Delta \vdash P :: T$ implies \relind{\Gamma; \Delta}{T}{P}{P};
+
+\item 
+ \emph{Symmetry:} \relind{\Gamma; \Delta}{T}{P}{Q} implies \relind{\Gamma; \Delta}{T}{Q}{P};
+\item 
+
+ \emph{Transitivity:} \relind{\Gamma; \Delta}{T}{P}{P'} and \relind{\Gamma; \Delta}{T}{P'}{Q} imply \relind{\Gamma; \Delta}{T}{P}{Q}.
+
+\end{itemize}
+\end{definition}
+
+\begin{proposition}
+\tybis is an equivalence relation.
+\end{proposition}
+%\begin{proof}
+%Reflexivity and symmetry are immediate from the definitions. 
+%Transitivity can be shown by exhibiting an appropriate typed context bisimulation. \qed
+%\end{proof}
+
+In our setting, a notion of congruence for type-respecting relations 
+turns out to be quite type-directed:
+%via right- and left-hand side typings, judgments 
+both right- and left-hand side typings
+are quite explicit on the compositionality properties of processes.
+Defining such a notion is relatively straightforward: unsurprisingly, it mirrors the structure of the typing rules. 
+For space reasons, we elide the details;  
+see 
+\longg{Appendix \ref{ap:congr} (Page \pageref{ap:congr})}{\cite{onlineapp}}
+for the  definition and proof that $\tybis$ is indeed a congruence.
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Soundness of Proof Conversions and Type Isomorphisms}\label{sec:comm}
+
+%Here we employ process-based reasoning techniques to clarify phenomena non trivial aspectes in the in the logic of the linear logic interpretation.
+We  
+use typed context bisimilarity---together with termination, subject reduction, and progress results---to 
+clarify two issues derived from the logical interpretation:
+soundness of proof conversions and observational characterizations of type isomorphisms.
+
+
+
+\paragraph{Soundness of Proof Conversions.~}
+\begin{figure}[t]
+$$
+\begin{array}{rcl}
+% $z{:}A\otimes B$ %2 
+ (\nu x)(\hat{D} \para (\nu y) z\out y.(\hat{E} \para \hat{F})) & \typconp  &  (\nu y) z\out y.( (\nu x)(\hat{D} \para \hat{E}) \para \hat{F}) \\
+% $y{:}A\lolli B$ % 4
+ (\nu x)(\hat{D} \para y(z).\hat{E}) & \typconp &  y(z).(\nu x) (\hat{D} \para \hat{E})  \\
+% $z{:}A\otimes B$ % 7
+%(\nu x)(\hat{D} \para (\nu z) y\out z.(\hat{E} \para \hat{F}))  & \typconp &  (\nu z) y\out z.(\hat{E} \para (\nu x)(\hat{D} \para  \hat{F})) \\
+% $z{:}A\oplus B$ (left) % 9
+(\nu x)(\hat{D} \para y.\mathtt{inl}; \hat{E}) & \typconp  &  y.\mathtt{inl};(\nu x)(\hat{D} \para  \hat{E})  \\
+% 15 copy
+ (\nu x)(\hat{D} \para (\nu y) u \out y.\hat{E})  & \typconp &  (\nu y) u \out y.(\nu x)(\hat{D} \para \hat{E}) \\
+% 13
+(\nu x)(\hat{D} \para y.\mathtt{case}(\hat{E}, \hat{F})) & \typconp  &  y.\mathtt{case}((\nu x)(\hat{D} \para  \hat{E}), (\nu x)(\hat{D} \para \hat{F})) \\
+ % 17
+ %(\nu x)(y(z).\hat{D} \para \hat{F})  & \typconp  &  y(z).(\nu x)  (\hat{D} \para \hat{F})  \\
+% 24
+(\nu u )( (!u(y).\hat{D})\para \zero ) & \typconp &  \zero  \\
+% 26
+(\nu u ) ((!u(y).\hat{D}) \!\para \! (\nu z)x \out z.(\hat{E} \!\para\! \hat{F})) & \typconp &   (\nu z)x \out z.( (\nu u )( (!u(y).\hat{D}) \!\para \!\hat{E}) \!\para\! (\nu u)((!u(y).\hat{D})\! \para \! \hat{F} ))  \\
+% 27
+ (\nu u )( (!u(y).\hat{D}) \para y(z).\hat{E})    & \typconp &     y(z).(\nu u )( (!u(y).\hat{D}) \para \hat{E})  \\
+ % 31
+ (\nu u )( (!u(z).\hat{D}) \para y.\mathtt{inl};\hat{E})  & \typconp &  y.\mathtt{inl};(\nu u )( (!u(z).\hat{D}) \para \hat{E})  \\
+ % 35
+  (\nu u )( (!u(z).\hat{D}) \para y.\mathtt{case}(\hat{E}, \hat{F}) ) & \typconp &  y.\mathtt{case}((\nu u )( (!u(z).\hat{D}) \para \hat{E}), (\nu u )( (!u(z).\hat{D}) \para \hat{F}))  \\
+% 36
+(\nu u )( (!u(y).\hat{D}) \para !x(z).\hat{E}) & \typconp &  !x(z).(\nu u )( (!u(y).\hat{D}) \para \hat{E})   \\
+% 38
+ (\nu u )( (!u(y).\hat{D}) \para (\nu y)v\out y.\hat{E})  & \typconp &  (\nu y)v\out y.(\nu u )( (!u(y).\hat{D}) \para \hat{E}) ) \\
+ % 1 prefix commutation
+ (\nu w)z \out w. (R \para (\nu y)x\out y.(P \para Q)) & \typconp & (\nu y)x\out y.(P \para (\nu w)z \out w. (R \para Q)) \\
+ % 2 prefix commutation 
+ x(y).z(w).P  & \typconp& z(w).x(y).P 
+\end{array}
+\vspace{-2ex}
+$$
+\caption{A sample of  process equalities induced by proof conversions}\label{f:sampleprconv}
+\vspace{-2ex}
+\end{figure}
+
+%% Adding the four figures of CCs
+%\input{cc-full}
+
+%% Adding the proof of soundness
+%\input{comm}
+
+%\subsection{Additional Commuting Conversions}\label{ss:commconv}
+Derivations in \DILL are related by structural and computational rules that express sound proof transformations that arise in cut-e\-lim\-ination. 
+As mentioned in Section \ref{sec:interp} (and fully detailed in~\cite{CairesP10}),
+in our interpretation
+reductions and structural conversions in \DILL correspond to reductions and  structural congruence in the 
+$\pi$-calculus. 
+There is, however, a group of conversions in \DILL 
+not considered in~\cite{CairesP10} and 
+which do not correspond to neither reduction or structural congruence in the process side.
+We call them \emph{proof conversions}: they induce a congruence on typed processes, denoted \eqcc.
+In this section, we show \emph{soundness} of \eqcc 
+with respect to $\approx$,  that is, 
+%if $(i)~\G; \D \vdash P ::T$, $(ii)~\G; \D \vdash Q ::T$, and $(iii)~P \eqcc Q$ then $\G;\D \vdash P \approx Q::T$. 
+processes extracted from proof conversions are typed contextually bisimilar.
+
+%Before stating the soundness result, w
+We illustrate  the proof conversions and their associated $\pi$-calculus processes;
+Fig.~\ref{f:sampleprconv} presents a sample of process equalities extracted from them. 
+Each equality $M \eqcc N$  is associated to appropriate right- and left-hand side typings; 
+%strictly speaking, a more formal notation is $\G; \D \vdash M \eqcc N{::}T$.
+this way, e.g., the last equality in Fig.~\ref{f:sampleprconv}---associated to two applications of rule \name{T$\lft\otimes$}---could be stated as 
+%\vspace{-1.5mm}
+$$\, \cdot \, ; x{:}A\otimes B, z{:}C\otimes D \vdash  x(y).z(w).P   \eqcc  z(w).x(y).P  ::T$$
+%\vspace{-1mm}
+where $A,B,C,D$ are types and $T$ is a right-hand side typing.
+For the sake of illustration, however, in Fig. \ref{f:sampleprconv} these  typings are elided, as 
+we would like to stress on the consequences of conversions on the process side. 
+%(Typing information is fundamental in proofs, though.)
+Proof conversions describe the interplay of two rules in a type-preserving way: 
+regardless of the order in which the rules are applied, they  lead to 
+typing derivations with the same right- and left-hand side typings, but with syntactically different processes.
+We consider two kinds of proof conversions.
+The first kind captures the interplay of left/right rules with T$\cut$/T$\cutbang$ rules; 
+the first twelve rows in Fig.~\ref{f:sampleprconv} are examples (the first five involve \name{T$\cut$}, the other seven involve \name{T$\cutbang$}).
+The second kind captures the interplay of 
+left and right rules with each other; typically they describe type-preserving transformations which commute 
+actions from non-interfering sessions inside a process (the last two rows in Fig.~\ref{f:sampleprconv} are examples).
+
+Let us comment on the fifth process equality in Fig. \ref{f:sampleprconv}.
+%we use commuting conversion number 13 (see Figure \ref{f:cc2}, Page \pageref{f:cc2}) as a running example. 
+%In the proof theoretical side we have
+%$$\cut \, D \, (x. \, \lft\oplus \,  y \, (y. \, E_{xy}) \, (y. \, F_{xy}) )::T \eqcc \lft\oplus \, y \, (y. \, \cut \, D \, (x. \, E_{xy})) \, (y. \, \cut \, D \, (x. \, F_{xy}))::T$$
+It corresponds to the interplay of rules \name{T$\cut$} and \name{T$\lft\oplus$}, 
+under 
+typing assumptions
+$\Gamma; \Delta_{1} \vdash \hat{D} :: x{:}C$, $~\Gamma; \Delta_{2},y{:}A,x{:}C \vdash \hat{E}{::}T$, and $\Gamma; \Delta_{2},y{:}A,x{:}C \vdash \hat{F}{::}T$. 
+Letting $\Delta = \Delta_{1},\Delta_{2}$, we have: 
+%\begin{eqnarray}
+$$\Gamma; \Delta, y{:}A\oplus B  \vdash \underbrace{(\nu x)(\hat{D} \!\para\! y.\mathtt{case}(\hat{E}, \hat{F}))}_{(1)} \eqcc \underbrace{\, y.\mathtt{case}((\nu x)(\hat{D} \!\para\!  \hat{E}), (\nu x)(\hat{D} \!\para\! \hat{F}))}_{(2)}::T$$
+%& \eqcc &  \nonumber \\
+%\Gamma, \Delta, y{:}A\oplus B & \vdash &   y.\mathtt{case}((\nu x)(\hat{D} \para  \hat{E}), (\nu x)(\hat{D} \para \hat{F}))::T
+%\end{eqnarray}
+with 
+types $T,A,B$, and $C$, linear environments $ \Delta_{1}, \Delta_{2}$, and non-linear environment $\Gamma$.
+
+Read from (1) to (2), this conversion can be interpreted as the ``promotion'' of the 
+choice at $y$, which causes  $\hat{D}$ to get ``delayed'' as a result. 
+However, such a delay is seen to be only apparent once we examine the individual typing of $\hat{D}$ and the whole typing derivation. 
+The first typing assumption says  that $\hat{D}$ is able to offer behavior $C$ at $x$ (a free name in $\hat{D}$), 
+as long as it is placed in a context in which the behaviors described by names in $\Gamma, \Delta_{1}$ are available.
+The left-hand side typing for both processes
+%The typing of the process in (1) 
+says that they can offer some behavior $T$, 
+as long as  the behaviors declared in $\Gamma, \Delta$ and 
+ behavior $A \oplus B$ at $y$ are provided. 
+Crucially, since $x$  is private to  (1), type $T$ cannot correspond to $x{:}C$.
+That is, even if $\hat{D}$ is at the top-level in (1) its behavior is not immediately available. 
+Also because of the left-hand side typing, we know that (1) and (2) are only able to interact with some selection at $y$; 
+only then, $\hat{D}$ will be 
+able to interact with either $\hat{E}$ or $\hat{F}$, whose behavior depends on the presence of behavior $C$ at $x$.
+A conversion of (1) into (2) could be seen as a ``behavioral optimization'' if one considers that 
+(2) has only one available prefix, while (1) has two parallel components.
+
+For all proof conversions, the apparent phenomenon of ``prefix promotion''
+induced by proof conversions can be explained along the above lines. 
+In our soundness result (Theorem \ref{l:soundcc}  below), 
+the crucial point is capturing the fact that some top-level processes may not be able to 
+\emph{immediately} exercise their behavior (cf. $\hat{D}$ in (1)  above).
+We use the following notations on type-respecting relations.
+%We first introduce some notation. 
+$\mathcal{I}_{\Gamma; \Delta \vdash T}$ stands for the relation 
+ $\{ (P, Q)  \,:\, \Gamma; \Delta \vdash P::T,\,\Gamma; \Delta \vdash Q::T \}$
+ which collects pairs of processes 
+ %which are typable under the same environments and offer the same behavior.
+ with identical left- and right-hand side typings. 
+%Also,  we sometimes write $\vdash P::T$ to stand for $ \cdot\, ; \, \cdot \vdash P::T$.
+Based on the logical interpretation of types, 
+we introduce a notion of ``continuation relation'' for pairs of typed processes:
+
+%for type $T$, denoted \contrel{T} will be also useful.
+%Intuitively, this relation contains pairs of processes of type $T$ but also pairs of processes of the constituents of $T$. 
+%For instance, \contrel{A \otimes B} contains pairs of processes typed with $A \otimes B$ 
+%but also pairs of processes typed with 
+%$B$, which is the type of the processes after 
+%exercising an output of a name of type $A$. More formally, we have:
+
+%Notation $(x. \, D)$ binds $x$ in $D$. 
+%We write $D_{x}$ if $x$ may occur in $D$.
+%For $\Gamma; \Delta \vdash D:C$, we write $\hat{D}^{z}$ for the extraction of $D$ such that 
+%$\Gamma; \Delta \vdash \hat{D}::z{:}C$.
+%We use $Id$ for the identity relation.
+
+\begin{definition}\label{d:contrel}
+Using $\boxtimes$ to range over $\otimes, \lolli$ and 
+$\boxplus$ to range over $\oplus, \with$,
+we define the type-respecting relation \contrel{x{:}A} by induction on the right-hand side typing, as follows:
+%\vspace{-2mm}
+\begin{align*}
+\contrel{x{:}\one} & = \mathcal{I}_{\, \vdash x{:}\one} \qquad~~ 
+\contrel{x{:}A \boxtimes B}  = \mathcal{I}_{\, \vdash x{:}B} \cup \contrel{x{:}B}\\
+%\contrel{x{:}A \lolli B} & = \mathcal{L}_{\, \vdash x{:}B} \cup \contrel{x{:}B}\\
+\contrel{x{:}!A} & = \mathcal{I}_{\, \vdash x{:}!A}\qquad
+\contrel{x{:}A \boxplus B}  = \mathcal{I}_{\, \vdash x{:}A} \cup \contrel{x{:}A} \cup \mathcal{I}_{\, \vdash x{:}B} \cup \contrel{x{:}B}
+%\contrel{x{:}A \with B} & = \mathcal{L}_{\, \vdash x{:}A} \cup \contrel{x{:}A} \cup \mathcal{L}_{\, \vdash x{:}B} \cup \contrel{x{:}B}
+\end{align*}
+
+\end{definition}
+This way, e.g., 
+the continuation relation for 
+$\, \vdash {x{:}A\otimes B}$ is $\mathcal{I}_{\, \vdash x{:}B} \cup \contrel{x{:}B}$:
+it contains all pairs typed by $\vdash x{:}B$ 
+(as processes of type $x{:}A\otimes B$ are to be typed by $x{:}B$ after the output action)
+as well as those pairs in the  continuation relation for $x{:}B$.
+
+
+
+\begin{theorem}[Soundness of Proof Conversions]\label{l:soundcc}
+%Assume 
+%(i) $\Gamma; \Delta \vdash D \ext P :: T$,
+%(ii) $\Gamma; \Delta \vdash E \ext Q :: T$, and 
+%(iii) $P \eqcc Q$.
+%Then, \trelind{\Gamma; \Delta}{T}{P}{Q}
+Let $P, Q$ be processes such that  
+(i) $\Gamma; \Delta \vdash D \ext P :: T$;
+(ii) $\Gamma; \Delta \vdash E \ext Q :: T$; 
+(iii) $P \eqcc Q$.
+Then, \trelind{\Gamma; \Delta}{T}{P}{Q}.
+\end{theorem}
+
+%\cut \, D \, (x. \, \rgt\otimes \, E_{x} \, F)  & ~~\ext ~~ & (\nu x)(\hat{D} \para (\nu y) z\out y.(\hat{E} \para \hat{F})) \lessp \\ 
+%\typcons & & \typconp \lessp \\
+%\rgt\otimes  \, (\cut \, D \, (x. \, E_{x})) \, F& \ext &  (\nu y) z\out y.( (\nu x)(\hat{D} \para \hat{E}) \para \hat{F}) 
+
+
+
+\begin{proof}
+%Proof of Item (1) is easy. As for Item (2), which states soundness of \eqcc with respect to $\approx$, t
+By coinduction, exhibiting appropriate typed context bisimulations 
+%\wit{k}{\Gamma; \, \Delta}
+for each proof conversion. % $k$.
+In the bisimulation game, we exploit termination of well-typed processes 
+(Theorem~\ref{c:term}) to ensure that actions can be matched with finite weak transitions, 
+and subject reduction (Theorem~\ref{th:sr}) to ensure type preservation under reductions.
+%We detail three representative cases: commuting conversions 2 and 4 (cf. Figure~\ref{f:cc1}), and 35 (cf. Figure~\ref{f:cc4}).
+
+We detail the case for the first proof conversion in Fig. \ref{f:sampleprconv}---see 
+\longg{Appendix \ref{ap:soundcc} (Page  \pageref{ap:soundcc})}{\cite{onlineapp}}
+for other cases.
+% No. 4 (cf. Figure~\ref{f:cc1}), and No. 35 (cf. Figure~\ref{f:cc4}).
+%\begin{description}
+%\item[Comm. Conversion No. 2.] 
+This proof conversion corresponds to the interplay of rules \name{T$\rgt\otimes$} and \name{T$\cut$}.
+We have to show that 
+\trelind{\Gamma; \Delta}{z{:}A \otimes B}{M}{N}
+where 
+%\vspace{-1.5mm}
+\begin{eqnarray}
+\Delta = \Delta_{1}, \Delta_{2}, \Delta_{3} ~~~
+\Gamma; \Delta_{1} \vdash \hat{D} :: x{:}C ~~~
+\Gamma; \Delta_{2}, x{:}C \vdash \hat{E} :: y{:}A ~~~
+\Gamma; \Delta_{3}\vdash \hat{F} :: z{:}B  ~~  \label{eq:cc2} \\
+M = (\nu x)(\hat{D} \para (\nu y) z\out y.(\hat{E} \para \hat{F}))  \quad N = (\nu y) z\out y.( (\nu x)(\hat{D} \para \hat{E}) \para \hat{F}) \qquad \nonumber 
+\end{eqnarray}
+Using Proposition~\ref{p:typclos}, we have to show that 
+for every $K \in \wit{}{\Gamma; \Delta}$, 
+we have $\vdash~\cntx{M} \approx \cntx{N}:: z{:}A \otimes B$.
+In turn, this implies exhibiting a typed context bisimulation $\rela{R}$ containing the pair $(\cntx M, \cntx{N})$.
+We define $\rela{R} =   \contrel{z{:}A\otimes B} \cup \rela{S} \cup \rela{S}^{-1}$,  with 
+%\vspace{-1.5mm}
+\begin{align*}
+\rela{S} = \,   &          \{(K_{1}[M'], K_{2}[N])  \,:\; M \wtra{} M',~~K_{1},K_{2} \in \wit{}{\Gamma;\Delta}\} 
+\end{align*}
+and 
+$\contrel{z{:}A\otimes B}$ is as in Definition \ref{d:contrel}.
+Notice that  
+$\rela{S}$ is a type-respecting relation indexed by $\vdash z{:}A \otimes B$.
+In fact, using the typings in (\ref{eq:cc2})---with $\Gamma = \Delta = \emptyset$---and exploiting subject reduction (Theorem \ref{th:sr}), it can be checked that 
+for all $(P, Q) \in \rela{S}$ both $\vdash P ::z{:}A \otimes B$ and $\vdash Q ::z{:}A \otimes B$ can be derived.
+%As it will become later on, $\rela{T}$ is a type-respecting relation indexed by $\vdash z{:}B$.
+
+We now show that 
+\rela{R}
+is a typed context bisimulation.
+Pick any $K \in \wit{}{\Gamma;\Delta}$.
+Using Proposition \ref{p:ctc}, we can assume $K = (\nu \til{u}, \til{x})(K_{\Gamma} \para K_{\Delta} \para [\cdot])$
+where 
+\begin{itemize}
+\item $K_{\Gamma} \equiv \prod_{i \in I} !u_{i}(y_{i}).R_{i}$, with $\vdash R_{i}::y_{i}{:}D_{i}$, for every $u_{i}{:}D_{i} \in \Gamma$;
+\item $K_{\Delta} \equiv \prod_{j \in J} S_{j}$, with $\vdash S_{j}::x_{j}{:}C_{j}$, for every $x_{j}{:}C_{j} \in \Delta$.
+\end{itemize}
+Clearly, 
+ $(\cntx{M}, \cntx{N}) \in \rela{S}$, and so it is in $\rela{R}$.
+Now, 
+suppose $\cntx{M}$ moves first: $\cntx{M} \tra{~\alpha~} M^{\star}_{1}$. 
+We have to find a matching action $\alpha$ from $\cntx{N}$, i.e., $\cntx{N} \wtra{\alpha} N^{\star}_{1}$.
+Since $\vdash \cntx{M}::z{:}A \otimes B$, we have two possible cases for $\alpha$: 
+
+\begin{enumerate}
+\item Case $\alpha = \tau$. We 
+consider the possibilities for the origin of the reduction:
+\begin{enumerate}
+\item $K_{\Gamma} \tra{~\tau~} K'_{\Gamma}$ and $K[M] \tra{~\tau~} K'[M]$.
+However, this cannot be the case, 
+as by construction $K_{\Gamma}$
+corresponds to the parallel composition of input-guarded replicated processes which cannot evolve on their own.
+
+\item  
+$K_{\Delta} \tra{~\tau~} K'_{\Delta}$ and $K[M] \tra{~\tau~} K'[M]$. % inside $M^{\star}$. 
+Then,  for some $l \in J$, $S_{l} \tra{~\tau~} S'_{l}$:
+%\vspace{-1.5mm}
+$$\cntx{M} \tra{~\tau~} (\nu \til{u},\til{x})(K_{\Gamma} \para K'_{\Delta} \para M)=K'[M] = M_{1}^{\star} $$
+Now, context $K$ is the same in $\cntx{N}$.
+Then $K_{\Delta}$ occurs identically in $\cntx{N}$, and this reduction can be  matched by a \emph{finite} weak transition (Theorem~\ref{c:term}): 
+$$\cntx{N} \wtra{}  (\nu \til{u},\til{x})(K_{\Gamma} \para K''_{\Delta} \para N) = K''[N] = N_{1}^{\star}$$
+By subject reduction (Theorem~\ref{th:sr}), $\vdash S'_{l} ::x_{l}{:}C_{l}$; hence, 
+$K',K''$ are  in \wit{R}{\Gamma;\Delta}. 
+Hence,  the pair $(K'[M], K''[N])$ is in 
+$\rela{S}$ (as $M \wtra{} M$) and so it is in $\rela{R}$.
+
+\item $M \tra{~\tau~} M'$ and $K[M] \tra{~\tau~} K[M']$.
+Since $M = (\nu x)(\hat{D} \para (\nu y) z\out y.(\hat{E} \para \hat{F})) $, 
+the only possibility is that there is a $\hat{D}_{1}$ such that 
+$\hat{D} \tra{~\tau~} \hat{D}_{1}$ and 
+$M' = (\nu x)(\hat{D}_{1} \para (\nu y) z\out y.(\hat{E} \para \hat{F})) $.
+This way, $$\cntx{M} \tra{~\tau~}   (\nu \til{u},\til{x})(K_{\Gamma} \para K_{\Delta} \para M') = \cntx{M'} = M_{1}^{\star}$$
+We observe that $\cntx{N}$
+cannot match this action, but 
+$\cntx{N} \wtra{} \cntx{N}$ is a valid  weak transition. 
+Hence, $N^{\star}_{1} = \cntx{N}$.
+By subject reduction (Theorem~\ref{th:sr}),  we infer that 
+$\vdash \cntx{M'}::z{:}A \otimes B$. 
+We use this fact to observe that the pair $(\cntx{M'}, \cntx{N})$  is included in $\rela{S}$.
+Hence, it is in $\rela{R}$.
+
+\item There is an interaction between $M$ and $K_{\Gamma}$ or between $M$ and $K_{\Delta}$: 
+this is only possible by the interaction of $\hat{D}$ with $K_{\Gamma}$ or $K_{\Delta}$ on names in $\til{u},\til{x}$. 
+Again, 
+the only possible weak transition from  
+$K[N]$ matching this reduction is  $\cntx{N} \wtra{} \cntx{N}$, 
+and the analysis proceeds as in the previous case.
+\end{enumerate}
+
+
+\item Case $\alpha \neq \tau$. Then the only possibility, starting from $\cntx{M}$, is an output action
+of the form
+$\alpha= \overline{(\nu y)z\out y}$.
+ This action can only originate in $M$:
+ %\vspace{-2mm}
+ $$\cntx{M} \tra{\overline{(\nu y)z\out y}} (\nu \til{x}, \til{u})(K_{\Gamma} \para K_{\Delta} \para (\nu x)(\hat{D} \para (\nu y) (\hat{E} \para \hat{F})) ) = M^{\star}_{1}$$
+Process
+$\cntx{N}$ can match this action via the following finite weak transition: 
+$$\cntx{N} \wtra{\overline{(\nu y)z\out y}} (\nu \til{x}, \til{u})(K'_{\Gamma} \para K'_{\Delta} \para (\nu y)( (\nu x)(\hat{D'} \para \hat{E'}) \para \hat{F'})  ) = N^{\star}_{1}$$
+Observe how $N^{\star}_{1}$ reflects the changes in $K[N]$ due to the possible reductions before and after the output action.
+By definition of $\approx$ (output case), we 
+consider the composition of $M^{\star}_{1}$ and $N^{\star}_{1}$ with 
+any $V$ such that $y{:}A \vdash V ::-{:}\one$.
+Using the typings in (\ref{eq:cc2}) and  subject reduction (Theorem~\ref{th:sr}), we infer both 
+% \vspace{-2mm}
+\begin{align*}
+\vdash M^{\star}_{2}  = (\nu \til{x}, \til{u})(K_{\Gamma} \para K_{\Delta} \para  (\nu x)(\hat{D} \para (\nu y)(\hat{E} \para V \para \hat{F}))):: z{:}B  \\
+\vdash N^{\star}_{2} = (\nu \til{x}, \til{u})(K'_{\Gamma} \para K'_{\Delta} \para  (\nu y)((\nu x)(\hat{D'} \para \hat{E'} \para V) \para \hat{F'})) :: z{:}B
+\end{align*}
+Hence, the pair $( M^{\star}_{2},  N^{\star}_{2})$ is in $\contrel{z{:}A \otimes B}$ and so it is in $\rela{R}$. \\
+\end{enumerate}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%\vspace{-5mm}
+Now suppose that $\cntx{N}$ moves first: $\cntx{N}  \tra{~\alpha~} N^{\star}_{1}$. 
+We have to find a matching action $\alpha$ from $\cntx{M}$:  $\cntx{M}  \wtra{~\alpha~} M^{\star}_{1}$. 
+Similarly as before, there are two cases: either $\alpha = \tau$ or 
+$\alpha = (\nu y)z\out y$. 
+The former is as detailed before; the only difference is that reductions 
+from $K[N]$ can only be originated in $K_{\Delta}$; these are matched by $K[M]$ with finite weak transitions  
+originating in both $K$ and in $M$. We thus  obtain pairs of processes in $\rela{S}^{-1}$.
+The analysis for the case for output mirrors the given above and is omitted.
+%We now detail the  case in which $\alpha = (\nu y)z\out y$. We have:
+%$$\cntx{N} \tra{(\nu y)z\out y} (\nu \til{x}, \til{u})(K_{\Gamma} \para K_{\Delta} \para (\nu y)( (\nu x)(\hat{D} \para \hat{E}) \para \hat{F})  ) = N^
+%{\star}_{1}$$
+%and this action can be matched by $\cntx{M}$ with a finite weak transition:
+%$$\cntx{M} \wtra{(\nu y)z\out y} (\nu \til{x}, \til{u})(K'_{\Gamma} \para K'_{\Delta} \para (\nu x)(\hat{D'} \para (\nu y) (\hat{E'} \para \hat{F'})) ) = M^{\star}_{1}$$
+%where $M^{\star}_{1}$ takes into account the possible reductions before and after the output action.
+%As before, we 
+%consider the composition of $N^{\star}_{1}$ and $M^{\star}_{1}$ with 
+%any $V$ such that $y{:}A \vdash V ::-{:}\one$.
+%Using (\ref{eq:cc2}), we can  infer both 
+%\begin{align*}
+%\vdash N^{\star}_{2} = (\nu \til{x}, \til{u})(K_{\Gamma} \para K_{\Delta} \para  (\nu y)((\nu x)(\hat{D} \para \hat{E} \para V) \para \hat{F})) :: z{:}B \\
+%\vdash M^{\star}_{2} = (\nu \til{x}, \til{u})(K'_{\Gamma} \para K'_{\Delta} \para  (\nu x)(\hat{D'} \para (\nu y)(\hat{E'} \para V \para \hat{F'}))):: z{:}B  
+%\end{align*}
+%Hence, 
+%the pair $(N^{\star}_{2}, M^{\star}_{2})$ is in $\contrel{z{:}A\otimes B}$ and so it is in $\rela{R}$.
+%This concludes the proof for this case.
+%\cut \, D \, (x. \, \lft\otimes \, y \, (z.y. \, E_{xzy}) ) & ~~\ext ~~ & (\nu x)(\hat{D} \para y(z).\hat{E})\lessp \\
+%\typcons & & \typconp \lessp \\
+%\lft\otimes \, y \, (z.y. \, \cut \, D \, (x. \, E_{xzy})) & \ext &  y(z).(\nu x) (\hat{D} \para \hat{E}) \morep \\
+  %\end{description}
+\qed
+\end{proof}
+
+
+
+
+%%% START PREFIX COMMUTATIONS
+%
+%
+%\paragraph{Soundness of Prefix Commutation}
+%We show that prefix commutation number 6 is sound with respect to the typed equivalence.
+%That is, we would like to show that 
+%$$
+%\Gamma; \Delta, z{:}C \otimes D \vdash x(y).z(w).P \tybis z(w).x(y).P::x{:}A\lolli B 
+%$$
+%with 
+%\begin{equation}\label{eq:pc6}
+%\Gamma; \Delta, z{:}D, w{:}C, y{:}A \vdash P :: x{:}B
+%\end{equation}
+%Let $M = x(y).z(w).P $ and $N = z(w).x(y).P$. 
+%By virtue of Prop. \ref{p:typclos}, we have to show that 
+%for every $K \in \wit{}{\Gamma; \Delta, z{:}C \otimes D}$, 
+%we have $\cdot ; \cdot \vdash \cntx{M} \approx \cntx{N}:: x{:}A \lolli B$.
+%In turn, this implies exhibiting a typed context bisimilarity $\rela{R}$ containing the pair $(\cntx M, \cntx{N})$.
+%We thus define $\rela{R}$ as :
+%\begin{align*}
+%\rela{R} & =  \contrel{x{:}A\lolli B} \cup \rela{S} \cup \rela{S}^{-1} ~\text{where:}\\
+%\rela{S}& = \, \{(\cntx{M}, \cntx{N'}) \,:\; N \Longrightarrow N',~ K \in \wit{}{\Gamma;\Delta,z{:}C\otimes D}\} 
+%\end{align*}
+%where 
+%$\contrel{x{:}A\lolli B}$ is the continuation relation (cf. Def \ref{d:contrel}) and 
+%$\rela{S}$ is a type-respecting relation indexed by $\vdash x{:}A \lolli B$.
+%In fact, using the typings in (\ref{eq:pc6})---with $\Gamma = \Delta = \emptyset$---and exploiting subject reduction (Theorem \ref{th:sr}), it can be checked that 
+%for all $(P, Q) \in \rela{S}$ both $\vdash P ::x{:}A \lolli B$ and $\vdash Q ::x{:}A \lolli B$ can be derived.
+%\\
+%
+%We now show that 
+%\rela{R}
+%is a typed context bisimilarity.
+%Pick any $K \in \wit{}{\Gamma;\Delta,z{:}C\otimes D}$.
+%Using Prop \ref{p:ctc}, we can assume $$K = (\nu \til{u}, \til{n},z)(K_{\Gamma} \para K_{\Delta} \para V \para [\cdot])$$
+%where 
+%$K_{\Gamma} \equiv \prod_{i \in I} !u_{i}(m_{i}).R_{i}$ (with $\vdash R_{i}::m_{i}{:}B_{i}$, for every $u_{i}{:}D_{i} \in \Gamma$),
+%$K_{\Delta} \equiv \prod_{j \in J} S_{j}$ (with $\vdash S_{j}::n_{j}{:}C_{j}$, for every $n_{j}{:}C_{j} \in \Delta$),
+%and $\vdash V::z{:}C \otimes D$.
+%Clearly, 
+% $(\cntx{M}, \cntx{N}) \in \rela{R}$.
+%Now, 
+%suppose $\cntx{M}$ moves first: $\cntx{M} \tra{~\alpha~} M^{\star}_{1}$. 
+%We have to find a matching action $\alpha$ from $\cntx{N}$, i.e., $\cntx{N} \wtra{\alpha} N^{\star}_{1}$.
+%Since $\vdash \cntx{M}::x{:}A \lolli B$, we have two possible cases for $\alpha$: 
+%
+%\begin{enumerate}
+%\item Case $\alpha = \tau$: We 
+%consider the different possibilities for the origin of the reduction:
+%\begin{enumerate}
+%\item The reduction originates in  $K_{\Gamma}$.
+%However, this cannot be the case, 
+%as by construction 
+%this process corresponds to the parallel composition of input-guarded replicated processes which cannot evolve on their own.
+%
+%\item The reduction originates in $K_{\Delta}$: 
+%$K_{\Delta} \redd K'_{\Delta}$. % inside $M^{\star}$. 
+%This means that, for some $l \in J$, $S_{l} \redd S'_{l}$.
+%This way, 
+%$$\cntx{M} \redd (\nu \til{u},\til{n},z)(K_{\Gamma} \para K'_{\Delta} \para V \para M)=K'[M] = M_{1}^{\star} $$
+%Since context $K$ is the same in $\cntx{N}$, 
+%we are sure that $K_{\Delta}$ occurs identically in $\cntx{N}$, this reduction can be trivially matched by a finite weak transition. 
+%We then have:
+%$$\cntx{N} \wtra{}  (\nu \til{u},\til{n}, z)(K_{\Gamma} \para K'_{\Delta} \para V \para N) = K'[N] = N_{1}^{\star}$$
+%By subject reduction (Theorem \ref{th:sr}), $\vdash S'_{l} ::x_{l}{:}C_{l}$; hence, 
+%$K'$ is  in \wit{R}{\vdash \Gamma; \Delta, z{:}C \otimes D}. Therefore,   
+%the pair $(K'[M], K'[N])$ is in $\rela{R}$,  and we are done.
+%
+%\item $V \redd V'$ and $K[M] \redd (\nu \til{u},\til{x}, z)(K_{\Gamma} \para K_{\Delta} \para V' \para M) = M_{1}^{\star}$: 
+%This case is similar to the previous one, as $V$ occurs identically in both processes.
+%
+%\item The reduction originates in $M$: $M \redd M'$. % inside $M^{\star}$.
+%Since we $M = x(y).z(w).P $, and because of the typings in (\ref{eq:pc6}), this is not possible.
+%
+%\item The reduction arises from the interaction of $V$ and $M$. % inside $M^{\star}$.
+%Because of the typings in (\ref{eq:pc6}), this is not possible.
+%
+%
+%\end{enumerate}
+%
+%
+%\item Case $\alpha \neq \tau$: Then the only possibility for such an action, starting from $\cntx{M}$, is an input action
+%of the form $\alpha= x(y)$. This action can only originate in $M$. 
+% Indeed, we have 
+%$$\cntx{M} \tra{x(y)} (\nu \til{u}, \til{n}, z)(K_{\Gamma} \para K_{\Delta} \para V \para z(w).P) = M^{\star}_{1}$$
+%Process
+%$\cntx{N}$ can match this action with the following weak transition. Observe how the input action on $x$ is preceded by
+%an interaction between $N$ and $V$ on  $z$:
+%$$\cntx{N} \tra{\tau} (\nu \til{u}, \til{n}, z)(K_{\Gamma} \para K_{\Delta} \para V' \para x(y).P) \tra{x(y)} (\nu \til{u}, \til{n}, z)(K_{\Gamma} \para K_{\Delta} \para V' \para P) = N^{\star}_{1}$$ 
+%
+%By definition of $\approx$ (input case), we 
+%consider the composition of $M^{\star}_{1}$ and $N^{\star}_{1}$ with 
+%any $R$ such that $\vdash R ::y{:}A$.
+%Using the typings in (\ref{eq:pc6}), we can  infer both 
+%\begin{align*}
+%\vdash (\nu \til{n}, \til{u},z)(K_{\Gamma} \para K_{\Delta} \para  V \para z(w).P \para R):: x{:}B  \\
+%\vdash (\nu \til{n}, \til{u},z)(K_{\Gamma} \para K_{\Delta} \para  V' \para P \para R) :: x{:}B
+%\end{align*}
+%Hence, 
+%the above two processes are in $\contrel{x{:}A\lolli B}$, and we are done.
+%\end{enumerate}
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%
+%THIS NEEDS TO BE FIXED:
+%Now, let us  suppose $\cntx{N} \tra{~\alpha~} N^{\star}_{1}$. 
+%We have to find a matching action $\alpha$ from $\cntx{M}$. 
+%Similarly as before, there are two cases: either $\alpha = \tau$ or 
+%$\alpha = (\nu y)z\out y$. 
+%The former is as detailed before; the only difference is that reductions can only arise
+%from $K_{\Delta}$, and not from $N$. We detail only the  case in which $\alpha = (\nu y)z\out y$, which is similar to the one given above.
+%Hence, we have
+%$$\cntx{N} \tra{(\nu y)z\out y} (\nu \til{x}, \til{u})(K_{\Gamma} \para K_{\Delta} \para (\nu y)( (\nu x)(\hat{D} \para \hat{E}) \para \hat{F})  ) = N^
+%{\star}_{1}$$
+%and this action can be immediately matched by $M^{\star}$ with a finite weak transition:
+%$$\cntx{M} \wtra{(\nu y)z\out y} (\nu \til{x}, \til{u})(K_{\Gamma} \para K'_{\Delta} \para (\nu x)(\hat{D} \para (\nu y) (\hat{E} \para \hat{F})) ) = M^{\star}_{1}$$
+%with $K_{\Delta} \wtra{} K'_{\Delta}$.
+%As before,
+%we 
+%consider the composition of $N^{\star}_{1}$ and $M^{\star}_{1}$ with 
+%any $R$ such that $y{:}A \vdash R ::-{:}\one$.
+%Using (\ref{eq:cc2}), we can  infer both 
+%\begin{align*}
+%\vdash (\nu \til{x}, \til{u})(K_{\Gamma} \para K_{\Delta} \para  (\nu y)((\nu x)(\hat{D} \para \hat{E} \para R) \para \hat{F})) :: z{:}B \\
+%\vdash (\nu \til{x}, \til{u})(K_{\Gamma} \para K'_{\Delta} \para  (\nu x)(\hat{D} \para (\nu y)(\hat{E} \para R \para \hat{F}))):: z{:}B  
+%\end{align*}
+%Hence, 
+%%since $\mathcal{I}_{\,\vdash z{:}B} \subseteq \rela{R}$, 
+%the above two processes are in  $\contrel{z{:}A\otimes B}$, and we are done.
+%This concludes the proof for this case.
+%% END PREFIX COMMUTATIONS
+
+%\newpage
+\newcommand{\tyiso}{\simeq}
+
+\paragraph{Type Isomorphisms.~}
+In type theory, types $A$ and $B$ are called \emph{isomorphic} if there are 
+morphisms (proofs in our case) $\pi_{A}$ of $B \vdash A$ and $\pi_{B}$ of $A\vdash B$
+which compose to the identity in both ways---see, e.g.,~\cite{Cosmo05}.
+We adapt this notion to our setting, 
+%by relying on the identity axiom of the type system, 
+using typed context bisimilarity to 
+%sensible notion for equality of proofs (processes), 
+ account for \emph{isomorphisms} in linear logic.
+(Below, we write $P^{\langle \til x \rangle}$ for a process parametric on a sequence of names $x_{1},\ldots,x_{n}$.)
+
+\begin{definition}[Isomorphism]\label{d:typiso}
+Two types $A$ and $B$ are called \emph{isomorphic}, noted $A{\tyiso}B$, if, 
+for any names $x,y,z$,
+there exist processes 
+$P^{\langle x,y \rangle}$ and $Q^{\langle y,x \rangle}$ such that:\\
+(i)~$\, \cdot \, ; x{:}A\vdash P^{\langle x,y \rangle}:: y{:}B$;    ~~(ii)~$\, \cdot \, ; y{:}B \vdash Q^{\langle y,x \rangle} :: x{:}A$; \\
+(iii) $\, \cdot \, ;  x {:} A \vdash (\nu y) (P^{\langle x,y \rangle} \para Q^{\langle y,z \rangle})  \tybis  \linkr{x}{z}::z{:}A$; and \\
+(iv) $\, \cdot \, ;  y {:} B \vdash (\nu x) (Q^{\langle y,x \rangle} \para P^{\langle x,z \rangle})  \tybis  \linkr{y}{z}::z{:}B$.
+\end{definition}
+
+Thus, intuitively, 
+if $A,B$ are service specifications then by
+establishing $A \tyiso B$ one can claim that having $A$ is as good as 
+having $B$, because 
+we can build one from the other using an isomorphism. 
+Isomorphisms in linear logic  can then be used to simplify/transform service interfaces in the $\pi$-calculus.
+%They can also help understanding the way our logic interpretation adheres to basic principles in linear logic. 
+They can also help validating our interpretation with respect to basic linear logic principles.
+As an example, let us consider multiplicative conjunction $\otimes$.
+A basic linear logic principle is $A \otimes B \vdash B \otimes A$.
+Our interpretation of $A \otimes B$ may appear asymmetric as, in general, a channel of type $A \otimes B$ is not typable by $B \otimes A$.
+%Using Definition \ref{d:typiso}, we state 
+Theorem \ref{t:iso} below 
+states the symmetric nature  of $\otimes$  as a type isomorphism:
+%the symmetry in $A \otimes B \vdash B \otimes A$ 
+symmetry is realized by a process which \emph{coerces} any session 
+of type $A \otimes B$ to a session of type $B \otimes A$.
+Other sensible isomorphisms, such as, e.g., 
+$(A \oplus B) \lolli C \tyiso (A \lolli C) \with (B \lolli C)$, can be handled similarly.
+
+%We
+%want to validate them to explain that having someone
+%offer the service of A * B is just as good as someone
+%offering B * A because we can build one from the other
+%with an isomorphism (and therefore the expected
+%behavior).
+
+%The above definition allows to give process grounded explanations for expected type isomorphisms in \DILL. 
+
+
+
+% on the significance
+%of isomorphisms for understanding why the basic operational
+%interpretation of logical formulas
+%does not contradict basic principles of LL, e.g., A(x)B = B(x)A does
+%not mean than "output prefixing is
+%commutative", even if the given isomorphism obviously holds in linear logic.
+
+\begin{theorem}\label{t:iso}
+Let $A, B$ be any type, as in Def \ref{d:types}. 
+Then $A \otimes B \tyiso B \otimes A$.
+\end{theorem}
+
+\begin{proof}%[Sketch] %TO BE DONE.
+We check conditions (i)-(iv)  
+of Def.~\ref{d:typiso}
+for processes $P^{\langle x,y \rangle}, Q^{\langle y,x \rangle}$ defined as 
+%\vspace{-1.5mm}
+\begin{eqnarray*}
+P^{\langle x,y \rangle} &=&x(u).(\nu n)y\out n.(\linkr{x}{n} \para \linkr{u}{y})\\
+Q^{\langle y,x \rangle}&=&y(w).(\nu m)x\out m.(\linkr{y}{m} \para \linkr{w}{x}) 
+\end{eqnarray*}
+%\vspace{-1mm}
+Checking (i)-(ii), i.e., 
+$\, \cdot \, ; x{:}A \otimes B  \vdash P^{\langle x,y \rangle} {::}y{:} B \otimes A$ and 
+$\, \cdot \, ; y{:}B \otimes A  \vdash Q^{\langle y,x \rangle} {::}x{:} A \otimes B$
+is easy; %for space reasons we elide the typing derivations. However,
+rule \name{T$\mathsf{id}$} ensures that both typings hold for any $A,B$. \\
+We then show (iii) and (iv). 
+We sketch only the proof of (iii); the proof of (iv) is analogous.
+Let $M = (\nu y) (P^{\langle x,y \rangle} \para Q^{\langle y,z \rangle})$ and $N = \linkr{x}{z}$; 
+we need to show 
+$\, \cdot \, ; x{:}A \otimes B \vdash M {\,\tybis \,}N::z{:}A \otimes B$.
+By Proposition \ref{p:typclos}, we have to show that 
+for every $K \in \wit{}{\, \cdot \, ; x {:} A \otimes B}$, 
+we have $\vdash~\cntx{M} \approx \cntx{N}:: z{:}A \otimes B$.
+In turn, this implies exhibiting a typed context bisimulation $\rela{R}$ containing $(\cntx M, \cntx{N})$.
+Letting $\rela{S} = \{(R_{1},R_{2}) :\cntx M \wtra{} R_{1},~\cntx N \wtra{} R_{2} \}$, 
+we set $\rela{R}{=}\contrel{z{:}A\otimes B} \cup \rela{S} \cup \rela{S}^{-1}$.
+Following expected lines, \rela{R} can be shown to be a typed context bisimulation. 
+\longg{See Appendix \ref{ap:tiso}, Page \pageref{ap:tiso}, for details.}{%\cite{onlineapp}
+}
+%Pick any $K \in \wit{}{\, \cdot \, ; x {:} A \otimes B}$.
+%Using Prop~\ref{p:ctc}, we can assume $K = (\nu x)(T^{\langle x\rangle} \para [\cdot])$
+%where $\vdash T^{\langle x\rangle}::x{:}A\otimes B$.
+%By Lemma \ref{lem:acshape} and Theorem \ref{c:term}, 
+%there exist $l, T_{1}^{\langle x\rangle}$ such that 
+% $T^{\langle x\rangle} \wtra{\overline{(\nu l)x \out l}}T_{1}^{\langle x\rangle}$ in a finite transition.
+%Clearly, $(\cntx{M}, \cntx{N}) \in \rela{R}$.
+%Now, suppose $\cntx{N} \tra{~\alpha~} N^{\star}_{1}$. 
+%We have to find a matching action $\alpha$ from $\cntx{M}$, i.e., $\cntx{N} \wtra{\alpha} M^{\star}_{1}$.
+%$\cntx N$ has only an internal action, which %so necessarily $\alpha = \tau$. 
+%leads to the renaming of $T^{\langle x\rangle}$: $\cntx N \tra{\tau} T^{\langle z\rangle} = N^{\star}_{1}$.
+%Using Theorem \ref{c:term},  $\cntx{M}$ can match this action
+%with a finite weak transition: % that includes communications  on $x$, $y$, and some renamings:
+%$\cntx{M} \wtra{} (\nu n)(T_{1}^{\langle n \rangle} \para (\nu m)z\out m.(\linkr{l}{m} \para \linkr{n}{z}) ) =  M^{\star}_{1}$.
+%Using Theorem \ref{th:sr}, we know that $(N^{\star}_{1}, M^{\star}_{1}) \in \rela{S}^{-1}$.
+%Now suppose  $N^{\star}_{1} \tra{\overline{(\nu l)z \out l}}T_{1}^{\langle z\rangle}$; 
+%$M^{\star}_{1}$ can match this action with an output followed by a renaming: $M^{\star}_{1} \wtra{\overline{(\nu m)z \out m}} T_{1}^{\langle z \rangle} \para \linkr{l}{m}$.
+%By definition of $\tybis$ (output clause), we take a process $S^{\langle c \rangle}$ such that $\,\cdot ; c{:}A \vdash S^{\langle c \rangle} ::-{:}\one$, and compose it with $N^{\star}_{1}$ and $M^{\star}_{1}$.
+%We thus obtain 
+%$N^{\star}_{2} = (\nu l) (T_{1}^{\langle z\rangle} \para S^{\langle l \rangle})$ and
+%$M^{\star}_{2} = (\nu m) (T_{1}^{\langle z\rangle} \para \linkr{l}{m} \para S^{\langle m \rangle})$; 
+%it can be easily checked that $(N^{\star}_{2}, M^{\star}_{2}) \in \contrel{z{:}A\otimes B}$.
+%When $\cntx{M}$ moves first, the analysis is similar and we omit it.
+\qed
+\end{proof}
+
+%To see this, in Theorem \ref{t:iso} 
+%we detail the case of  $A \otimes B \tyiso B \otimes A$; 
+%other isomorphisms  can be proved similarly.
+
+
+
+%In~\cite{YoshidaBH04},  
+%termination  for an asynchronous $\pi$-calculus is also established  using logical relations. 
+%There, the  semantic interpretation of types relies heavily on 
+% conditions for ensuring the duality/com\-ple\-men\-tar\-i\-ty of processes, 
+% which are provided by an action type system enhanced with causality and linearity information.
+%%As in our work,  the proof of termination in~\cite{YoshidaBH04}
+%%In~\cite{YoshidaBH04},  
+%%termination  for an asynchronous $\pi$-calculus is established by exploiting action types enhanced with causality and linearity information.
+%%As in our work,  the proof of termination in~\cite{YoshidaBH04} uses  logical relations; 
+%%their  semantic interpretation of types relies heavily on 
+%% conditions for ensuring the duality/com\-ple\-men\-tar\-i\-ty of processes, which are provided by the action type system.
+%As applications, \cite{YoshidaBH04} establishes a finite axiomatization of weak bisimilarity and liveness of linear processes.
+%Logical relations are also used in~\cite{Sangiorgi06}
+%to prove termination for a  functional, localized variant of the $\pi$-calculus; 
+%this fragment is characterized via constraints on the syntax
+%and the types of processes, which are arguably more standard than those in  \cite{YoshidaBH04}.
+%The result is then extended to a larger language by simulation-based proofs. 
+%%That way, termination of the fragment of functional processes implies termination of more expressive languages, featuring, e.g., forms of input actions disallowed by the syntactic conditions. 
+%%A limitation in~\cite{YoshidaBH04,Sangiorgi06} is that they restrict to functional processes mainly; as a remedy to this,  
+%%proofs of termination based on term rewriting techniques %(precisely, on suitable measures that decrease along reduction) 
+%%were proposed in \cite{DengS06}.
+%%Recent works (e.g., \cite{DemangeonHS10}) have advocated proofs based on
+%%the combination of 
+%%logical relations and term rewriting techniques.
+%%for proving termination in larger classes of processes.
+
+%\longg{\section{Related Work}\label{sec:relwork}}{\section{Related Work and Concluding Remarks}\label{sec:relwork}} 
+%\longg{}{\noindent \emph{Related Work.~}}
+\section{Related Work}\label{sec:relwork} %\vspace{-1mm}
+Termination in the $\pi$-calculus using logical relations 
+has been studied in~\cite{YoshidaBH04,Sangiorgi06}.
+Neither of these works considers session types; 
+hence, 
+the technical details of the logical relations 
+are very different, with 
+semantic interpretations of types relying on constraints on the syntax and the types of processes.  
+%In comparison to the type systems studied in~\cite{YoshidaBH04,Sangiorgi06}, 
+%the type system considered here---binary session types---is more standard and well-established.
+%None of the above mentioned works deals with the use of logic relations for proving termination for calculi with session types, as we do here.
+Here we started from a well-established type discipline 
+for the $\pi$-calculus %so as to obtain termination, 
+and showed termination of well-typed processes. %and its applications. 
+In contrast,  
+both~\cite{YoshidaBH04,Sangiorgi06}
+follow a somewhat opposite path, and aim at 
+ type disciplines that guarantee termination.
+The interpretation of intuitionistic linear logic as session types
+allows for intuitive logical relations, 
+%our logical relations are more intuitive than in~\cite{YoshidaBH04,Sangiorgi06}: 
+%they are 
+%Indeed, our semantic interpretation of types is 
+truly defined on the structure of types.
+In this sense, 
+our approach is more principled than in~\cite{YoshidaBH04,Sangiorgi06}, as it is not an adaptation
+of the method, but rather an instantiation of the method on our canonical
+linear type structure.
+%%Moreover, our proof is more direct than the one in \cite{Sangiorgi06}, as we do not require to appeal to syntactic constraints on the processes. 
+%the type system allows for simple semantic interpretations of types.
+%A similar argument applies for the causality information necessary in~\cite{YoshidaBH04}: 
+%the causality in our system is completely explained by the type system, as witnessed by 
+%Theorem \ref{l:soundcc}.
+%%the soundness of proof conversions stated in Section~\ref{sec:comm}.
+
+%A very recent work has proposed a
+Another interpretation of session types as linear logic propositions is proposed in~\cite{dallago11}.
+It is based on   \emph{soft} linear logic~\cite{Lafont04},  and so 
+ the exponential ``$!$'' is treated following a non canonical discipline that uses two different typing environments.
+Hence, typing rules and judgements in~\cite{dallago11} are rather different from ours.
+%A bound on the length of reductions starting from well-typed-processes is obtained; 
+%the proof appeals to techniques from Implicit Computational Complexity.
+A bound on the length of reductions starting from well-typed-processes is obtained;
+the proof uses techniques from Implicit Computational Complexity.
+Notions of observational equivalence and their applications are not addressed in~\cite{dallago11}.
+Although here we do not provide a similar bound, 
+it is  remarkable that our proof of termination %(a very strong property in itself)
+follows \emph{only} the principles and properties of~\cite{CairesP10}; 
+in contrast to~\cite{dallago11}, 
+our proof  does not appeal to extraneous technical devices, 
+and preserves a standard, intuitive treatment of ``$!$''. 
+This is particularly desirable for 
+extensions/generalizations of our framework, such as the proposed in~\cite{Toninho2011,Toninho2011b}. 
+
+
+%\paragraph{Bisimilarities for Typed Processes.}
+%There is a long strand of work on 
+%notions of typed behavioral equivalences for process calculi.
+%loosely related previous works have 
+%considered languages 
+%with 
+%type systems with, e.g.,  
+%linear types (see, e.g.,~\cite{DBLP:conf/popl/KobayashiPT96}).
+%, input/output types (see, e.g.,~\cite{BorealeS98,PierceS96,DengS06tcs}), %polymorphic types (see, e.g.,~\cite{PierceS00}), and
+%subtyping  (see, e.g.,~\cite{HennessyR04}). 
+Loosely related to typed context bisimilarity is %observational equivalence  is 
+%The interplay of linearity and typed behavioral equivalences is studied 
+\cite{DBLP:journals/jlp/YoshidaHB07}, where
+%based on the linear type system in \cite{YoshidaBH04}, 
+a form of \emph{linear bisimilarity} is proposed; 
+following a linear type structure, 
+it treats some visible actions  as internal actions, thus leading to an equivalence 
+larger than standard bisimilarity
+which is  a congruence.
+%In session-based concurrency, typed behavioral equivalences  have been less studied; 
+The only work on behavioral equivalences for session-based concurrency we are aware of is~\cite{Kouzapas11}.
+It studies the behavioral theory of a $\pi$-calculus with asynchronous session communication 
+and an event inspection primitive for buffered messages.
+The aim is to capture the distinction between
+order-preserving communications (inside already established connections) and non-order-preserving communications (outside established connections). 
+%Such a distinction begs for a notion of observables that differs from that in usual semantics for asynchronous and synchronous communications. 
+%In particular, the behavioral theory of \cite{Kouzapas11} 
+Such a behavioral theory
+accounts for principles for prefix commutation that appear similar to those 
+induced by our proof conversions. However, the origin and the nature of these commutations are quite different.
+In fact, while in~\cite{Kouzapas11} 
+prefix commutation arises from the  distinction mentioned above, 
+commutations in our (synchronous) framework are due to %(and can be explained by) the 
+causality relations captured by types. \\
+%As discussed in Section \ref{sec:comm}, rather than prefix ``promotion'' and ``delay'', 
+%our commuting conversions induce a ``behavioral optimization'' as the behavior in the seemingly ``delayed'' prefix is not actually available, as attested by our soundness result. 
+%That is, while in \cite{Kouzapas11} prefix commutation is a consequence of the interplay between asynchronous communication, buffered messages, and event detection, in our case it can be explained by the high degree of information contained in the type of a process.
+
+
+%\longg{\section{Concluding Remarks}\label{sec:concl}}{\noindent\emph{Concluding Remarks.~}\label{sec:concl}}
+\section{Concluding Remarks}\label{sec:concl}
+By relying on the principles established by an interpretation of linear logic as session types~\cite{CairesP10}, 
+we have introduced a theory of logical relations for session-typed disciplines.
+Our development is remarkably similar to that for functional languages; 
+although in our setting types are assigned to names (and not to terms), 
+our linear logical relations are defined on the structure of types,
+relying both on process reductions and labeled transitions.
+A main application of this theory is a proof that well-typed processes always terminate.
+%In this paper,  we have further developed the interpretation of (binary) session types as intuitionistic linear propositions proposed in \cite{CairesP10}.
+%%Our focus has been on termination and equivalence properties. 
+%%As for the former, w
+%We have shown that well-typed processes terminate. 
+%The proof relies only on the principles and properties established in \cite{CairesP10} and is remarkably similar to those for functional languages.
+This way, in  addition to \emph{safety} properties (nothing bad happens, cf.  subject reduction),
+we have shown that %the typing discipline in \cite{CairesP10} 
+session-typed processes
+also enjoy an important \emph{liveness} property such as termination.
+Certifying termination of interacting concurrent systems is indeed important, from foundational and practical standpoints.
+We developed two applications of these results, which complement the results in~\cite{CairesP10}. 
+Both of them rely on a novel observational equivalence for typed processes.
+First, we have shown soundness of \emph{proof conversions} with respect to observational equivalence---an issue left open in~\cite{CairesP10}. 
+Second, we studied  \emph{type isomorphisms}
+resulting from linear logic equivalences
+in our setting.
+The basic properties of the interpretation---especially, the combination of subject reduction and termination---were of the essence 
+in both applications.
+Ongoing work concerns sound \emph{and} complete axiomatizations
+of typed context bisilmilarity
+via proof conversions. %, and the observational  equivalence via 
+Having introduced the method of logical relations for session types, 
+%in the short term 
+we plan to 
+explore it further for
+obtaining other results, such as parametricity. \\ %, following analogous developments in the functional setting.
+%Also, we would like to deepen on  the consequences, in the process side, of recent extensions to the logic  interpretation \cite{Toninho2011,Toninho2011b}. \\
+
+\noindent\emph{Acknowledgments.~}
+%Support for this research was provided 
+This research was supported 
+by the Funda\c{c}\~{a}o para a
+Ci\^{e}ncia e a Tecnologia (Portuguese Foundation for Science and
+Technology) through the Carnegie Mellon Portugal Program, under grants
+INTERFACES NGN-44 / 2009
+and 
+SFRH / BD / 33763 / 2009, and CITI.
+We thank the anonymous reviewers for their useful comments.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%\newpage
+
+\bibliographystyle{abbrv}
+ \bibliography{referen}
+ 
+ \newpage
+\longg{\appendix \input{appendix}}{}
+
+%\newpage
+%\input{behtheory}
+%\newpage
+%\input{newcc-full}
+%\end{document}
+
+\end{document}
+\vspace{-2ex}
+{
+\begin{thebibliography}{10}
+
+\bibitem{DBLP:journals/tcs/Abramsky93}
+S.~Abramsky.
+\newblock {Computational Interpretations of Linear Logic}.
+\newblock {\em TCS}, 111(1{\&}2), 1993.
+
+\bibitem{Andreoli92}
+J-M. Andreoli.
+\newblock {Logic Programming with Focusing Proofs in Linear Logic}.
+\newblock {\em Journal of Logic and Computation}, 2(3):197--347, 1992.
+
+\bibitem{BP:97}
+A.~Barber and G.~Plotkin.
+\newblock {Dual Intuitionistic Linear Logic}.
+\newblock Technical Report LFCS-96-347, Univ. of Edinburgh, 1997.
+
+\bibitem{DBLP:journals/entcs/Beffara06}
+E.~Beffara.
+\newblock {A Concurrent Model for Linear Logic}.
+\newblock {\em ENTCS}, 155:147--168, 2006.
+
+\bibitem{bellin.scott:linear-logic}
+G.~Bellin and P.~Scott.
+\newblock {On the $\pi$-Calculus and Linear Logic}.
+\newblock {\em TCS}, 135:11--65, 1994.
+
+\bibitem{Bonelli05}
+E.~Bonelli, A.~Compagnoni, and E.~L. Gunter.
+\newblock {Correspondence Assertions for Process Synchronization in Concurrent
+  Communications}.
+\newblock {\em J. of Func. Prog.}, 15(2):219--247, 2005.
+
+\bibitem{DBLP:journals/tcs/Boreale98}
+M.~Boreale.
+\newblock {On the Expressiveness of Internal Mobility in Name-Passing Calculi}.
+\newblock {\em Theoretical Computer Science}, 195(2):205--226, 1998.
+
+\bibitem{DBLP:conf/calco/Caires07}
+L.~Caires.
+\newblock Logical semantics of types for concurrency.
+\newblock In T.~Mossakowski, U.~Montanari, and M.~Haveraaen, editors, {\em
+  Intl. Conference on Algebra and Coalgebra in Computer Science, CALCO 2007},
+  pages 16--35. Springer LNCS 4624, 2007.
+
+\bibitem{Cervesato02ic}
+I.~Cervesato and F.~Pfenning.
+\newblock {A Linear Logical Framework}.
+\newblock {\em Inf. \& Comput.}, 179(1), 2002.
+
+\bibitem{Pfenning2003TR}
+B-Y.~E. Chang, K.~Chaudhuri, and F.~Pfenning.
+\newblock {A Judgmental Analysis of Linear Logic}.
+\newblock Technical Report CMU-CS-03-131R, Carnegie Mellon University, 2003.
+
+\bibitem{DL10}
+M.~Dezani-Ciancaglini and U.~de' Liguoro.
+\newblock {Sessions and Session Types: an Overview}.
+\newblock In {\em 6th Intl Workshop on Web Services and Formal Methods
+  WS-FM'09}, Lecture Notes in Computer Science. Springer-Verlag, 2010.
+
+\bibitem{DLYTGC07}
+M.~{Dezani-Ciancaglini}, U.~{de' Liguoro}, and N.~Yoshida.
+\newblock {On Progress for Structured Communications}.
+\newblock In G.~Barthe and C.~Fournet, editors, {\em 3th Symposium Trustworthy
+  Global Computing, TGC 2007}, pages 257--275. Springer LNCS 4912, 2008.
+
+\bibitem{DBLP:journals/acta/GayH05}
+S.~Gay and M.~Hole.
+\newblock {Subtyping for Session Types in the Pi Calculus}.
+\newblock {\em Acta Informatica}, 42(2-3):191--225, 2005.
+
+\bibitem{DBLP:conf/tapsoft/GirardL87}
+J.-Y. Girard and Y.~Lafont.
+\newblock {Linear Logic and Lazy Computation}.
+\newblock In H.~Ehrig, R.~A. Kowalski, G.~Levi, and U.~Montanari, editors, {\em
+  Theory and Practice of Software Development, TAPSOFT'87}, pages 52--66.
+  Springer LNCS 250, 1987.
+
+\bibitem{GV10}
+M.~Giunti and V.~T. Vasconcelos.
+\newblock {A Linear Account of Session Types in the Pi-Calculus}.
+\newblock In P.~Gastin and F.~Laroussinie, editors, {\em 21st International
+  Conference on Concurrency Theory, Concur 2010}. Springer-Verlag, 2010.
+
+\bibitem{DBLP:conf/concur/Honda93}
+K.~Honda.
+\newblock {Types for Dyadic Interaction}.
+\newblock In E.~Best, editor, {\em 4th International Conference on Concurrency
+  Theory, Concur 1993}, pages 509--523. Springer-Verlag, 1993.
+
+\bibitem{HondaLaurent08}
+K.~Honda and O.~Laurent.
+\newblock {An Exact Correspondence between a Typed pi-calculus and Polarised
+  Proof-Nets}.
+\newblock {\em Theoretical Computer Science}, 2010.
+\newblock To appear.
+
+\bibitem{DBLP:conf/esop/HondaVK98}
+K.~Honda, V.~T. Vasconcelos, and M.~Kubo.
+\newblock {Language Primitives and Type Discipline for Structured
+  Communication-Based Programming}.
+\newblock In C.~Hankin, editor, {\em 7th European Symposium on Programming
+  Languages and Systems, ESOP 1998}, volume 1381 of {\em Lecture Notes in
+  Computer Science}, pages 122--138. Springer-Verlag, 1998.
+
+\bibitem{DBLP:conf/fpca/HylandO95}
+J.~M.~E. Hyland and C.-H.~Luke Ong.
+\newblock {Pi-Calculus, Dialogue Games and PCF}.
+\newblock In {\em WG2.8 Conference on Functional Programming Languages}, pages
+  96--107, 1995.
+
+\bibitem{DBLP:journals/toplas/Kobayashi98}
+N.~Kobayashi.
+\newblock {A Partially Deadlock-Free Typed Process Calculus}.
+\newblock {\em ACM Tr. Progr. Lang. Sys.}, 20(2):436--482, 1998.
+
+\bibitem{DBLP:conf/popl/KobayashiPT96}
+N.~Kobayashi, B.~C. Pierce, and D.~N. Turner.
+\newblock {Linearity and the Pi-Calculus}.
+\newblock In {\em 23rd Symp. on Principles of Programming Languages, POPL
+  1996}, pages 358--371. ACM, 1996.
+
+\bibitem{Miln92}
+R.~Milner.
+\newblock Functions as processes.
+\newblock {\em Math. Struc. in Computer Sciences}, 2(2):119--141, 1992.
+
+\bibitem{DBLP:journals/tcs/Sangiorgi96a}
+D.~Sangiorgi.
+\newblock {Pi-Calculus, Internal Mobility, and Agent Passing Calculi}.
+\newblock {\em Theoretical Computer Science}, 167(1{\&}2):235--274, 1996.
+
+\bibitem{sangiorgi-walker:book}
+D.~Sangiorgi and D.~Walker.
+\newblock {\em The $\pi$-calculus: A Theory of Mobile Processes}.
+\newblock CUP, 2001.
+
+\bibitem{Watkins04lfm}
+K.~Watkins, I.~Cervesato, F.~Pfenning, and D.~Walker.
+\newblock Specifying properties of concurrent computations in {CLF}.
+\newblock In C.Sch{\"u}rmann, editor, {\em 4th Intl. Workshop on Logical
+  Frameworks and Meta-Languages (LFM'04)}, Cork, Ireland, July 2004. ENTCS, vol
+  199.
+
+\bibitem{DBLP:journals/jlp/YoshidaHB07}
+N.~Yoshida, K.~Honda, and M.~Berger.
+\newblock {Linearity and Bisimulation}.
+\newblock {\em J. Logic and Algebraic Programming}, 72(2):207--238, 2007.
+\end{thebibliography}
+%
+}
+
